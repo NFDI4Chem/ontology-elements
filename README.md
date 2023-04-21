@@ -1,46 +1,24 @@
 # ontology-elements
 
-This template should help get you started developing with Vue 3 in Vite.
+Web components are a set of standardized web platform APIs (Application Programming Interfaces) for creating reusable, encapsulated, and interoperable custom HTML elements. They allow developers to define their own HTML tags and elements with associated JavaScript logic, styles, and templates, which can then be used across multiple web pages and applications. Web components make it easier to build complex web applications by promoting modularity, reusability, and extensibility, and can improve the performance, maintainability, and accessibility of web content.
 
-## Recommended IDE Setup
+Ontology-Elements project aims at developing custom ontology rich html elements (web components). The primary benefit of custom html elements is that they can be used with any framework, or even without a framework. This makes them ideal for distributing components where the end consumer may not be using the same frontend stack, or when you want to insulate the end application from the implementation details of the components it uses.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Help Desk
 
-## Type Support for `.vue` Imports in TS
+If you discover any issue or need any support please raise a ticket at our [Help Desk](https://helpdesk.nfdi4chem.de/).
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## Features and Bugs
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+To raise request for any new feature or report any bug please add it to our [Github Issues](https://github.com/NFDI4Chem/ontology-elements/issues).
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+## License
 
-## Customize configuration
+Licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Maintained by
+Ontology-Elements is developed and maintained by the [NFDI4Chem partners](https://www.nfdi4chem.de/) at the [Friedrich Schiller University](https://www.uni-jena.de/en/) Jena, Germany. 
+The code for this web application is released under the [MIT license](https://opensource.org/licenses/MIT).
 
-## Project Setup
 
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+<p align="left"><a href="https://nfdi4chem.de/" target="_blank"><img src="https://www.nfdi4chem.de/wp-content/themes/wptheme/assets/img/logo.svg" width="50%" alt="NFDI4Chem Logo"></a></p>
