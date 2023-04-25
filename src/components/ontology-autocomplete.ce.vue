@@ -81,13 +81,15 @@ async function getSelectOptions() {
     matches.value = []
     return []
   }
-  let ontologies = searchTerm.value.split(':')[0]
+  let ontologiesExists = searchTerm.value.indexOf(':')
+  let ontologies = ''
   let term = null
-  if (!ontologies) {
+  if (ontologiesExists < 0) {
     ontologies = props.ontologies
     term = searchTerm.value
   } else {
     term = searchTerm.value.split(':')[1]
+    ontologies = searchTerm.value.split(':')[0]
   }
 
   const url = 'https://service.tib.eu/ts4tib/api/select?q='
