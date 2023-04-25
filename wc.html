@@ -1,18 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>NFDI4Chem: Ontology Elements</title>
-  </head>
-  <body>
-    <h1>Ontology - Web Components</h1>
-    <ontology-annotation annotation="Macrobrachium nipponense	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_159736"></ontology-annotation><br/>
-    <ontology-annotation annotation="Homo sapiens	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_159736"/></ontology-annotation><br/>
-    <script type="module">
-      import { OntologyAnnotation, register } from './dist/index.js'
-      register()
-      // customElements.define("onto-annotation", OntologyAnnotation);
-    </script>
-  </body>
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <title>NFDI4Chem: Ontology Elements</title>
+   </head>
+   <body>
+      <h1>Ontology - Web Components</h1>
+      <ontology-annotation annotation="Macrobrachium nipponense	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_159736"></ontology-annotation>
+      <br/>
+      <ontology-autocomplete 
+         format="text"
+         id="ontologyInput"
+         label="Input field (ontology driven)"
+         info="Search terms across ontologies"
+         value="hello"
+         placeholder="search term"
+      /></ontology-autocomplete><br/>
+      <button id="saveBtn">Save</button>
+      <script type="module">
+         import { OntologyAutoComplete, OntologyAnnotation, register } from './dist/index.js'
+         register()
+         
+         let ontoBtn = document.getElementById("saveBtn")
+         ontoBtn.addEventListener('click', doThingBtn);
+         function doThingBtn(e){
+           console.log(document.getElementById('ontologyInput').getAttribute('value'))
+         }
+
+         let ontoInput = document.getElementById("ontologyInput")
+         ontoInput.addEventListener('change', saveValue);
+         function saveValue(e){
+          ontoInput.setAttribute('value', e.detail[0])
+         }
+      </script>
+   </body>
 </html>

@@ -16,8 +16,8 @@ const source = computed(() => {
 })
 </script>
 <template>
-  <slot name="header"></slot>
-  <a :href="iri" target="_blank"> {{ source }}: {{ term }} </a>
-  <slot name="footer"></slot>
+  <a v-if="annotation && annotation != ''" :href="iri" target="_blank">
+    {{ source }}: {{ term }}
+  </a>
 </template>
 <style></style>
