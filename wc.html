@@ -7,31 +7,30 @@
    </head>
    <body>
       <h1>Ontology - Web Components</h1>
+      <h3>Ontology - Annotation</h3>
+      <pre>Macrobrachium nipponense	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_159736</pre>
       <ontology-annotation annotation="Macrobrachium nipponense	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_159736"></ontology-annotation>
-      <br/>
+      <br/><br/>
+      <h3>Ontology - Autocomplete</h3>
       <ontology-autocomplete 
          format="text"
          id="ontologyInput"
          label="Input field (ontology driven)"
-         info="Search terms across ontologies"
+         info="Search terms across ontologies. Example: Homo sapiens, obi:Homo sapiens"
          value="hello"
          placeholder="search term"
       /></ontology-autocomplete><br/>
-      <button id="saveBtn">Save</button>
+      <code><pre id="output"></pre></code>
       <script type="module">
          import { OntologyAutoComplete, OntologyAnnotation, register } from './dist/index.js'
          register()
          
-         let ontoBtn = document.getElementById("saveBtn")
-         ontoBtn.addEventListener('click', doThingBtn);
-         function doThingBtn(e){
-           console.log(document.getElementById('ontologyInput').getAttribute('value'))
-         }
-
          let ontoInput = document.getElementById("ontologyInput")
          ontoInput.addEventListener('change', saveValue);
          function saveValue(e){
-          ontoInput.setAttribute('value', e.detail[0])
+            document.getElementById('output').innerHTML = ""
+            ontoInput.setAttribute('value', e.detail[0])
+            document.getElementById('output').innerHTML = document.getElementById('ontologyInput').getAttribute('value')
          }
       </script>
    </body>
