@@ -1,5 +1,151 @@
-/* @import './base.css'; */
+<template>
+  <div class="auto-search-wrapper">
+    <label v-if="label">{{ label }}</label>
+    <input
+      type="text"
+      id="search"
+      v-model="searchTerm"
+      @input.stop="getSelectOptions"
+      :placeholder="placeholder"
+      autocomplete="off"
+    />
+    <p v-if="info && matches.length == 0">{{ info }}</p>
+    <div v-else class="auto-results-wrapper auto-is-active">
+      <ul tabindex="0" role="listbox">
+        <li
+          v-for="doc in matches"
+          :key="doc['short_label']"
+          role="option"
+          tabindex="-1"
+          aria-selected="false"
+          aria-setsize="3"
+          aria-posinset="0"
+          @click="selectTerm(doc)"
+        >
+          <p v-html="highlight(doc['label'])"></p>
+          <p><small v-html="concat(doc['description'])"></small></p>
+          <small>{{ doc['ontology_prefix'] }}:{{ doc['iri'] }}</small>
+        </li>
+      </ul>
+    </div>
+    <button
+      v-if="searchTerm != '' && matches.length > 0"
+      type="button"
+      aria-label="clear the search query"
+    ></button>
+  </div>
+</template>
 
+<script lang="ts" setup>
+import { ref, computed } from 'vue'
+
+const props = defineProps({
+  label: {
+    type: String,
+    required: false,
+    default: ''
+  },
+  info: {
+    type: String,
+    required: false,
+    default: ''
+  },
+  placeholder: {
+    type: String,
+    required: false,
+    default: ''
+  },
+  ontologies: {
+    type: String,
+    required: false,
+    default: ''
+  },
+  format: {
+    type: String,
+    required: false,
+    default: 'text'
+  },
+  modelValue: {
+    type: String
+  }
+})
+
+let searchTerm = ref('')
+
+const emit = defineEmits(['change'])
+
+let matches = ref([])
+
+async function getSelectOptions() {
+  if (searchTerm.value === '') {
+    matches.value = []
+    return []
+  }
+  let ontologies = searchTerm.value.split(':')[0]
+  let term = null
+  if (!ontologies) {
+    ontologies = props.ontologies
+    term = searchTerm.value
+  } else {
+    term = searchTerm.value.split(':')[1]
+  }
+
+  const url = 'https://service.tib.eu/ts4tib/api/select?q='
+  const queries = encodeURI(
+    '&ontology=' +
+      ontologies +
+      '&fieldList=iri,label,short_form,obo_id,ontology_name,ontology_prefix,description,type&obsoletes=false&local=false&rows=10'
+  )
+
+  let response = (await fetch(`${url}${term}${queries}`)).json()
+  response.then((body) => {
+    matches.value = body.response.docs
+  })
+}
+
+function highlight(content: string) {
+  if (!searchTerm.value) {
+    return content
+  }
+  return content.replace(new RegExp(searchTerm.value, 'gi'), (match) => {
+    return '<span class="highlightText">' + match + '</span>'
+  })
+}
+
+function concat(data: Array<[]>) {
+  return data ? data.join('') : ''
+}
+
+let selectedTerm = ref(null)
+
+const selectedValue = computed(() => {
+  if (!selectedTerm.value) {
+    return null
+  }
+  if (props.format && props.format == 'json') {
+    return selectedTerm.value
+  } else {
+    return selectedTerm.value
+      ? selectedTerm.value['label'] +
+          '\t' +
+          selectedTerm.value['ontology_prefix'] +
+          '\t' +
+          selectedTerm.value['iri'] +
+          '\t' +
+          selectedTerm.value['type']
+      : ''
+  }
+})
+
+const selectTerm = (term: any) => {
+  selectedTerm.value = term
+  searchTerm.value = term.label
+  emit('change', selectedValue.value)
+  matches.value = []
+}
+</script>
+
+<style scoped>
 :root {
   --close-button: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.984 6.422 13.406 12l5.578 5.578-1.406 1.406L12 13.406l-5.578 5.578-1.406-1.406L10.594 12 5.016 6.422l1.406-1.406L12 10.594l5.578-5.578z'/%3E%3C/svg%3E");
   --loupe-icon: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23929292' d='M16.041 15.856a.995.995 0 0 0-.186.186A6.97 6.97 0 0 1 11 18c-1.933 0-3.682-.782-4.95-2.05S4 12.933 4 11s.782-3.682 2.05-4.95S9.067 4 11 4s3.682.782 4.95 2.05S18 9.067 18 11a6.971 6.971 0 0 1-1.959 4.856zm5.666 4.437-3.675-3.675A8.967 8.967 0 0 0 20 11c0-2.485-1.008-4.736-2.636-6.364S13.485 2 11 2 6.264 3.008 4.636 4.636 2 8.515 2 11s1.008 4.736 2.636 6.364S8.515 20 11 20a8.967 8.967 0 0 0 5.618-1.968l3.675 3.675a.999.999 0 1 0 1.414-1.414z'/%3E%3C/svg%3E");
@@ -198,3 +344,4 @@ li.loupe:before {
 .hidden {
   display: none;
 }
+</style>
