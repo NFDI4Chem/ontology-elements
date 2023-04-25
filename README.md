@@ -6,7 +6,7 @@ Ontology-Elements project aims at developing custom ontology rich html elements 
 
 ![vue-custom-element-why](https://user-images.githubusercontent.com/4065285/234296898-952d18de-d051-42ca-af71-2454a16c0275.png)
 
-Image courtesy: https://github.com/karol-f
+ <em>Image courtesy: https://github.com/karol-f</em>
 
 ## Help Desk
 
