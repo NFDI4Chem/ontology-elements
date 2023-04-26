@@ -64,9 +64,6 @@ const props = defineProps({
     type: String,
     required: false,
     default: 'text'
-  },
-  modelValue: {
-    type: String
   }
 })
 

@@ -198,3 +198,33 @@ li.loupe:before {
 .hidden {
   display: none;
 }
+
+#autocomplete {
+  opacity: 0.6;
+  background: transparent;
+  position: absolute;
+  box-sizing: border-box;
+  cursor: text;
+  pointer-events: none;
+  color: black;
+  opacity: 0.6;
+  background: transparent;
+}
+
+.vc_textarea {
+  min-height: 100px;
+  width: 100%;
+  resize: none;
+  border: 1px solid #d7d7d7;
+  box-shadow: none;
+  box-sizing: border-box;
+  font-size: 16px;
+  padding: 12px 45px 12px 10px;
+  width: 100%;
+}
+
+#mainInput {
+  background: transparent;
+  color: black;
+  opacity: 1;
+}
