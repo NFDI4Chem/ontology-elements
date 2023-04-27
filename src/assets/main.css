@@ -227,13 +227,13 @@ li.loupe:before {
   opacity: 1;
 }
 
-.contextmenu{
+.contextmenu {
   position: absolute;
   background: #ffffff;
   color: #000;
   margin-top: 5px;
   border: 1px solid #f1f1f2;
-  box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.2);
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
   border-radius: 0.2rem;
   width: 15rem;
   max-width: calc(100vw - 2rem);
@@ -243,22 +243,22 @@ li.loupe:before {
   z-index: 100;
 }
 
-.contextmenu .contextmenu-item{
+.contextmenu .contextmenu-item {
   border-bottom: 1px solid #c3c3c3;
   padding: 8px;
 }
 
-.contextmenu .contextmenu-item:hover{
+.contextmenu .contextmenu-item:hover {
   cursor: pointer;
   background-color: #f1f1f2;
 }
 
-.contextmenu .contextmenu-item p{
+.contextmenu .contextmenu-item p {
   margin: 0;
   padding: 0;
 }
 
-.contextmenu .contextmenu-item .iri{
+.contextmenu .contextmenu-item .iri {
   margin: 0;
   width: 15rem;
   white-space: nowrap;
