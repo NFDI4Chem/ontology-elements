@@ -4,9 +4,7 @@ Web components are a set of standardized web platform APIs (Application Programm
 
 Ontology-Elements project aims at developing custom ontology rich html elements (web components). The primary benefit of custom html elements is that they can be used with any framework, or even without a framework. This makes them ideal for distributing components where the end consumer may not be using the same frontend stack, or when you want to insulate the end application from the implementation details of the components it uses.
 
-![vue-custom-element-why](https://user-images.githubusercontent.com/4065285/234296898-952d18de-d051-42ca-af71-2454a16c0275.png)
-
- <em>Image courtesy: https://github.com/karol-f</em>
+![ontology-custom-element-why](./public/oe.png)
 
 ## Help Desk
 
