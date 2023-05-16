@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "ontology-elements",
   description: "ontology-elements docs",
-  base: '/NFDI4Chem/ontology-elements/',
+  base: '/ontology-elements/',
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
