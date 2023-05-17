@@ -7,11 +7,11 @@ hero:
   tagline: "Custom rich ontology driven html elements (web components) that can be used with any web framework, or even without a framework."
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Documentation
+      link: /introduction
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Demo
+      link: /demo
 
 features:
   - title: Semantic data capture

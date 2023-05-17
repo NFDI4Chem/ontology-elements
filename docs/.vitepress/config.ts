@@ -7,7 +7,7 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Docs', link: '/docs' },
+      { text: 'Docs', link: '/introduction' },
       { text: 'Demo', link: '/demo' }
     ],
 
@@ -15,36 +15,35 @@ export default defineConfig({
       {
         text: 'Introduction',
         items: [
-          { text: 'What are ontology elements?', link: '/markdown-examples' },
-          { text: 'Getting started', link: '/api-examples' },
-          { text: 'Ontology Lookup Service (OLS)', link: '/api-examples' },
+          { text: 'What are ontology elements?', link: '/introduction' },
+          { text: 'Ontology Lookup Service (OLS)', link: '/ols' },
         ]
       },
       {
         text: 'Components',
         items: [
-          { text: 'Annotation', link: '/markdown-examples' },
-          { text: 'Autocomplete (Input)', link: '/api-examples' },
-          { text: 'Compose (Textarea)', link: '/api-examples' },
-          { text: 'Annotate (Textarea)', link: '/api-examples' },
+          { text: 'Annotation', link: '/ontology-annotation' },
+          { text: 'Autocomplete (Input)', link: '/ontology-autocomplete' },
+          { text: 'Compose (Textarea)', link: '/ontology-compose' },
+          { text: 'Annotate (Textarea)', link: '/ontology-annotate' },
         ]
       },
       {
         text: 'Usage',
         items: [
-          { text: 'React', link: '/markdown-examples' },
-          { text: 'Angular', link: '/api-examples' },
-          { text: 'Vuejs', link: '/api-examples' },
-          { text: 'No framework', link: '/api-examples' },
+          { text: 'React', link: '/react' },
+          { text: 'Angular', link: '/angular' },
+          { text: 'Vuejs', link: '/vuejs' },
+          { text: 'No framework (static)', link: '/static-html' },
         ]
       },
       {
         text: 'Development',
         items: [
-          { text: 'Local setup', link: '/markdown-examples' },
-          { text: 'FAQs', link: '/api-examples' },
-          { text: 'License', link: '/api-examples' },
-          { text: 'Issues / Feature requests', link: '/api-examples' },
+          { text: 'Local setup', link: '/development-installation' },
+          { text: 'FAQs', link: '/faqs' },
+          { text: 'License', link: '/license' },
+          { text: 'Issues / Feature requests', link: '/issues' },
         ]
       }
     ],
