@@ -20,4 +20,3 @@ const source = computed(() => {
     {{ source }}: {{ term }}
   </a>
 </template>
-<style></style>

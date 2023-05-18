@@ -13,3 +13,4 @@ customElements.define('ontology-annotation', OntologyAnnotation)
 customElements.define('ontology-autocomplete', OntologyAutoComplete)
 customElements.define('ontology-annotate', OntologyAnnotate)
 customElements.define('ontology-compose', OntologyCompose)
+

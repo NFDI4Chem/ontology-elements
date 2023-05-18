@@ -6,22 +6,12 @@
         @mouseup="checkSelection"
         @keyup="checkSelection"
         @input="onInput"
-        type="text"
         class="vc_textarea"
         contenteditable="true"
       >
         {{ content }}
       </div>
-    </div>
-    <div>
-      <div v-if="loading" style="float: right">
-        <i>...loading</i>
-      </div>
-      <div>
-        <span v-if="info">{{ info }}</span>
-      </div>
-    </div>
-    <div class="contextmenu" :style="'left:' + cords.x + 'px; top:' + cords.y + 'px'">
+      <div class="contextmenu" :style="'left:' + cords.x + 'px; top:' + cords.y + 'px'">
       <div class="contextmenu-item" v-if="matches.length == 0 && !loading">No matches found</div>
       <div v-else>
         <div
@@ -38,6 +28,15 @@
           <p v-html="highlight(doc['label'])"></p>
           <small class="iri">{{ doc['ontology_prefix'] }}:{{ doc['iri'] }}</small>
         </div>
+      </div>
+    </div>
+    </div>
+    <div>
+      <div v-if="loading" style="float: right">
+        <i>...loading</i>
+      </div>
+      <div>
+        <span v-if="info">{{ info }}</span>
       </div>
     </div>
   </div>
@@ -157,6 +156,7 @@ function checkSelection(e: any) {
   searchTerm.value = ''
   if (window.getSelection) {
     var selection = window.getSelection()
+    console.log(selection)
     searchTerm.value = selection?.toString()!
     if (searchTerm.value && searchTerm.value != '') {
       matches.value = []
@@ -182,15 +182,20 @@ function highlight(content: string) {
 function getSelectionCoords(sel: any, atStart: boolean = true) {
   if (!sel?.rangeCount) return null
   let range = sel.getRangeAt(0).cloneRange()
+  console.log(range.getClientRects())
   if (!range.getClientRects) return null
   range.collapse(atStart)
   let rects = range.getClientRects()
-  if (rects.length <= 0) return null
-  let rect = rects[0]
-  cords.value.start = sel.anchorOffset
-  cords.value.end = sel.focusOffset
-  cords.value.x = rect.x
-  cords.value.y = rect.y + rects[0]?.height
+  if (rects.length <= 0){
+    cords.value.x = 0
+    cords.value.y = 0
+  }else{
+    let rect = rects[0]
+    cords.value.start = sel.anchorOffset
+    cords.value.end = sel.focusOffset
+    cords.value.x = rect.x
+    cords.value.y = rect.y + rects[0]?.height
+  }
 }
 
 async function getSelectOptions(event: any) {
@@ -237,4 +242,60 @@ async function getSelectOptions(event: any) {
   })
 }
 </script>
-<style></style>
+<style scoped>
+.vc_textarea {
+  min-height: 100px;
+  width: 100%;
+  border: 1px solid #d7d7d7;
+  box-shadow: none;
+  box-sizing: border-box;
+  padding: 12px 45px 12px 10px;
+  width: 100%;
+}
+
+#mainInput {
+  background: transparent;
+  color: black;
+  opacity: 1;
+}
+
+.contextmenu {
+  position: absolute;
+  background: #ffffff;
+  color: #000;
+  margin-top: 5px;
+  border: 1px solid #f1f1f2;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.2rem;
+  width: 15rem;
+  max-width: calc(100vw - 2rem);
+  max-height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  z-index: 100;
+}
+
+.contextmenu .contextmenu-item {
+  border-bottom: 1px solid #c3c3c3;
+  padding: 8px;
+}
+
+.contextmenu .contextmenu-item:hover {
+  cursor: pointer;
+  background-color: #f1f1f2;
+}
+
+.contextmenu .contextmenu-item p {
+  margin: 0;
+  padding: 0;
+}
+
+.contextmenu .contextmenu-item .iri {
+  margin: 0;
+  width: 15rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  padding: 0;
+}
+</style>
