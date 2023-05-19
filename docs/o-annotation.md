@@ -11,7 +11,7 @@ Ontology elements provide an annotation component that renders the annotation in
 
 Annotated term below
 
-```tsv
+```
 Macrobrachium nipponense	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_159736
 ```
 
