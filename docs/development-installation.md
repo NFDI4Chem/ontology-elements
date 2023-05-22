@@ -15,7 +15,7 @@ git checkout development
 npm install
 npm run dev
 ```
-Go to http://127.0.0.1:5173 to interact with the components (vue application).
+Go to ```http://127.0.0.1:5173``` to interact with the components (vue application).
 
 ### Build
 
@@ -46,7 +46,7 @@ npm install
 npm run docs:dev
 ```
 
-Go to http://localhost:5173/ontology-elements/ to view docs
+Go to ```http://localhost:5173/ontology-elements/``` to view docs
 
 If you update the docs 
 
