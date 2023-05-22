@@ -2,48 +2,44 @@
 outline: deep
 ---
 
+<script setup lang="ts">
+import "./../dist/index.js";
+</script>
+
 # Demo
 
-This page demonstrates usage of some of the runtime APIs provided by VitePress.
+## Ontology Annotation
 
-The main `useData()` API can be used to access site, theme, and page data for the current page. It works in both `.md` and `.vue` files:
+<ontology-annotation 
+    annotation="Macrobrachium nipponense	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_159736">
+</ontology-annotation>
 
-```md
-<script setup>
-import { useData } from 'vitepress'
+## Ontology Autocomplete
 
-const { theme, page, frontmatter } = useData()
-</script>
+<ontology-autocomplete 
+    format="text"
+    label="Input field (ontology driven)"
+    info="Example: Homo sapiens, obi:Homo sapiens"
+    @change="value = $event.detail[0]"
+    placeholder="search term"
+></ontology-autocomplete>
 
-## Results
+## Ontology Annotate
 
-### Theme Data
-<pre>{{ theme }}</pre>
+<ontology-annotate
+    format="text"
+    label="Input field (ontology driven)"
+    info="Search terms across ontologies"
+    modelValue="value"
+    @change="value = $event.detail[0]"
+></ontology-annotate>
 
-### Page Data
-<pre>{{ page }}</pre>
+## Ontology Compose
 
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
-```
-
-<script setup>
-import { useData } from 'vitepress'
-
-const { site, theme, page, frontmatter } = useData()
-</script>
-
-## Results
-
-### Theme Data
-<pre>{{ theme }}</pre>
-
-### Page Data
-<pre>{{ page }}</pre>
-
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
-
-## More
-
-Check out the documentation for the [full list of runtime APIs](https://vitepress.dev/reference/runtime-api#usedata).
+<ontology-compose
+    format="text"
+    label="Input field (ontology driven)"
+    info="Search terms across ontologies"
+    modelValue="value"
+    @change="value = $event.detail[0]"
+></ontology-compose>
