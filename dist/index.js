@@ -58,12 +58,12 @@ const Y = ["href"], Z = /* @__PURE__ */ L({
     async function S() {
       if (t.value === "")
         return o.value = [], [];
-      let c = t.value.indexOf(":"), f = "", g = null;
-      c < 0 ? (f = _.ontologies, g = t.value) : (g = t.value.split(":")[1], f = t.value.split(":")[0]);
-      const v = "https://service.tib.eu/ts4tib/api/select?q=", I = encodeURI(
+      let c = t.value.indexOf(":"), f = "", v = null;
+      c < 0 ? (f = _.ontologies, v = t.value) : (v = t.value.split(":")[1], f = t.value.split(":")[0]);
+      const g = "https://service.tib.eu/ts4tib/api/select?q=", I = encodeURI(
         "&ontology=" + f + "&fieldList=iri,label,short_form,obo_id,ontology_name,ontology_prefix,description,type&obsoletes=false&local=false&rows=10"
       );
-      (await fetch(`${v}${g}${I}`)).json().then((M) => {
+      (await fetch(`${g}${v}${I}`)).json().then((M) => {
         o.value = M.response.docs;
       });
     }
@@ -82,7 +82,7 @@ const Y = ["href"], Z = /* @__PURE__ */ L({
       V(d("input", {
         type: "text",
         id: "search",
-        "onUpdate:modelValue": f[0] || (f[0] = (g) => U(t) ? t.value = g : t = g),
+        "onUpdate:modelValue": f[0] || (f[0] = (v) => U(t) ? t.value = v : t = v),
         onInput: A(S, ["stop"]),
         placeholder: e.placeholder,
         autocomplete: "off"
@@ -91,24 +91,24 @@ const Y = ["href"], Z = /* @__PURE__ */ L({
       ]),
       e.info && n(o).length == 0 ? (l(), r("p", ae, b(e.info), 1)) : (l(), r("div", ne, [
         d("ul", le, [
-          (l(!0), r(N, null, K(n(o), (g) => (l(), r("li", {
-            key: g.short_label,
+          (l(!0), r(N, null, K(n(o), (v) => (l(), r("li", {
+            key: v.short_label,
             role: "option",
             tabindex: "-1",
             "aria-selected": "false",
             "aria-setsize": "3",
             "aria-posinset": "0",
-            onClick: (v) => k(g)
+            onClick: (g) => k(v)
           }, [
             d("p", {
-              innerHTML: C(g.label)
+              innerHTML: C(v.label)
             }, null, 8, ie),
             d("p", null, [
               d("small", {
-                innerHTML: s(g.description)
+                innerHTML: s(v.description)
               }, null, 8, se)
             ]),
-            d("small", null, b(g.ontology_prefix) + ":" + b(g.iri), 1)
+            d("small", null, b(v.ontology_prefix) + ":" + b(v.iri), 1)
           ], 8, re))), 128))
         ])
       ])),
@@ -165,7 +165,7 @@ const Y = ["href"], Z = /* @__PURE__ */ L({
   setup(e, { emit: y }) {
     const _ = e, t = (Math.random() + 1).toString(36).substring(7), o = m(null), S = m(!1);
     let C = m(""), s = m({ x: -1e3, y: 0, start: -1, end: -1 }), a = m(""), w = m(!1), k = m([]), c = F([]);
-    const f = /* @__PURE__ */ new WeakMap(), g = O(() => "left:" + s.value.x + "px; top:" + s.value.y + "px"), v = O(() => {
+    const f = /* @__PURE__ */ new WeakMap(), v = O(() => "left:" + s.value.x + "px; top:" + s.value.y + "px"), g = O(() => {
       let i = S ? o.value?.value : C.value;
       return i ? _.format && _.format == "json" ? {
         text: i,
@@ -182,7 +182,7 @@ $$$$
       i?.shadowRoot && (S.value = !0);
     });
     function I(i) {
-      C.value = i.target.innerText, y("change", v.value);
+      C.value = i.target.innerText, y("change", g.value);
     }
     function z(i) {
       let u = {
@@ -195,7 +195,7 @@ $$$$
         let h = { x: 0, y: 0, start: o.value?.selectionStart, end: o.value?.selectionEnd };
         u = { ontology: i, context: h };
       }
-      c.push(u), k.value = [], a.value = "", y("change", v.value);
+      c.push(u), k.value = [], a.value = "", y("change", g.value);
     }
     function M(i) {
       if (a.value = "", window.getSelection) {
@@ -261,7 +261,7 @@ $$$$
       n(a) != "" ? (l(), r("div", {
         key: 3,
         class: "contextmenu",
-        style: G(n(g))
+        style: G(n(v))
       }, [
         n(k).length == 0 && !n(w) ? (l(), r("div", me, "No matches found")) : (l(), r("div", be, [
           (l(!0), r(N, null, K(n(k), (h) => (l(), r("div", {
@@ -317,8 +317,8 @@ $$$$
   emits: ["change"],
   setup(e, { emit: y }) {
     const _ = e;
-    let t = m(""), o = m(""), S = -1, C = 100, s = 0, a = m([]), w = "", k = "", c = !1, f = m([]), g = m([]), v = m(null);
-    const I = O(() => v.value ? v.value ? v.value.label + "	" + v.value.ontology_prefix + "	" + v.value.iri + "	" + v.value.type : "" : null), z = O(() => t.value ? _.format && _.format == "json" ? {
+    let t = m(""), o = m(""), S = -1, C = 100, s = 0, a = m([]), w = "", k = "", c = !1, f = m([]), v = m([]), g = m(null);
+    const I = O(() => g.value ? g.value ? g.value.label + "	" + g.value.ontology_prefix + "	" + g.value.iri + "	" + g.value.type : "" : null), z = O(() => t.value ? _.format && _.format == "json" ? {
       text: t.value,
       ontology: f.value
     } : t.value + `
@@ -340,7 +340,7 @@ $$$$
         p.preventDefault(), u();
       else if (t.value) {
         let x = t.value.split(" ");
-        x.length > 1 ? (w = x.slice(-1)[0], k = x.slice(-2).join(" ")) : (w = x[0], k = w), w == "" && (c = !1, v.value = null, o.value = t.value), c && (w = k), i();
+        x.length > 1 ? (w = x.slice(-1)[0], k = x.slice(-2).join(" ")) : (w = x[0], k = w), w == "" && (c = !1, g.value = null, o.value = t.value), c && (w = k), i();
       }
     }
     function j() {
@@ -355,7 +355,7 @@ $$$$
       }, C);
     }
     function u() {
-      t.value = o.value, f.value.push(I.value), g.value.push(v.value);
+      t.value = o.value, f.value.push(I.value), v.value.push(g.value);
     }
     async function h() {
       const p = "https://service.tib.eu/ts4tib/api/select?q=", x = encodeURI("&obsoletes=false&local=false&rows=10");
@@ -365,11 +365,9 @@ $$$$
     }
     function $() {
       let p = "";
-      if (v.value) {
-        v.value = a.value[s], p = v.value.label;
-        let x = p.toLowerCase().replace(w, "");
-        x != null && (o.value = t.value + x);
-      }
+      g.value = a.value[s], p = g.value.label;
+      let x = p.toLowerCase().replace(w, "");
+      x != null && (o.value = t.value + x);
     }
     return (p, x) => (l(), r("div", null, [
       e.label ? (l(), r("label", Me, b(e.label), 1)) : T("", !0),
@@ -378,7 +376,7 @@ $$$$
           "onUpdate:modelValue": x[0] || (x[0] = (q) => U(o) ? o.value = q : o = q),
           id: "autocomplete",
           type: "text",
-          class: "vc_textarea",
+          class: "o_annotate_textarea",
           line: "10"
         }, null, 512), [
           [B, n(o)]
@@ -389,13 +387,13 @@ $$$$
           onChange: A(j, ["stop"]),
           "onUpdate:modelValue": x[1] || (x[1] = (q) => U(t) ? t.value = q : t = q),
           type: "text",
-          class: "vc_textarea"
+          class: "o_annotate_textarea"
         }, null, 40, Oe), [
           [B, n(t)]
         ])
       ]),
       e.info && n(a).length == 0 ? (l(), r("p", Ie, b(e.info), 1)) : T("", !0),
-      n(v) ? (l(), r("span", ze, [
+      n(g) ? (l(), r("span", ze, [
         d("code", null, [
           d("pre", null, b(n(I)), 1)
         ])
@@ -407,8 +405,8 @@ $$$$
       ])) : T("", !0)
     ]));
   }
-}), Le = `.vc_textarea[data-v-e52a6af8]{min-height:100px;border:1px solid #d7d7d7;box-shadow:none;box-sizing:border-box;padding:12px 45px 12px 10px;width:100%}#mainInput[data-v-e52a6af8]{background:transparent;color:#000;opacity:100}#autocomplete[data-v-e52a6af8]{position:absolute;box-sizing:border-box;cursor:text;pointer-events:none;color:#000;opacity:.6;background:transparent}
-`, Re = /* @__PURE__ */ H(Ae, [["styles", [Le]], ["__scopeId", "data-v-e52a6af8"]]), je = R(Z), De = R(pe), Ve = R(qe), Ue = R(Re);
+}), Le = `.o_annotate_textarea[data-v-c52caae7]{min-height:100px;border:1px solid #d7d7d7;box-shadow:none;box-sizing:border-box;padding:12px 45px 12px 10px;width:100%}#mainInput[data-v-c52caae7]{background:transparent;color:#000;opacity:100}#autocomplete[data-v-c52caae7]{position:absolute;box-sizing:border-box;cursor:text;pointer-events:none;color:#000;opacity:.6;background:transparent}
+`, Re = /* @__PURE__ */ H(Ae, [["styles", [Le]], ["__scopeId", "data-v-c52caae7"]]), je = R(Z), De = R(pe), Ve = R(qe), Ue = R(Re);
 if (typeof window < "u") {
   let e = window.customElements;
   e.define("ontology-annotation", je), e.define("ontology-autocomplete", De), e.define("ontology-annotate", Ve), e.define("ontology-compose", Ue);

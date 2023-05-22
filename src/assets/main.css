@@ -200,14 +200,13 @@ li.loupe:before {
 }
 
 #autocomplete {
-  opacity: 0.6;
+  opacity: 1;
   background: transparent;
   position: absolute;
   box-sizing: border-box;
   cursor: text;
   pointer-events: none;
   color: black;
-  opacity: 0.6;
   background: transparent;
 }
 
