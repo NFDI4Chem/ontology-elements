@@ -23,14 +23,10 @@ let value = ref("")
 <span v-if="value && value != ''">
 <br/>Output:
 
-#text
-<pre style="margin:0">
-<code>
-{{ value }}
-</code>
-</pre>
+**#text**
+<pre style="margin:0"><code>{{ value }}</code></pre>
 
-#rich
+**#rich**
 <ontology-annotation 
     :annotation="value">
 </ontology-annotation>

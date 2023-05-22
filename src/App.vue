@@ -30,12 +30,14 @@ let composedContent = ref('')
       </code>
       <hr />
       <h2>Ontology Annotate</h2>
-      <ontology-annotate
-        format="text"
-        label="Input field (ontology driven)"
-        info="Search terms across ontologies"
-        @change="annotatedContent = $event"
-      ></ontology-annotate>
+      <div>
+        <ontology-annotate
+          format="text"
+          label="Input field (ontology driven)"
+          info="Search terms across ontologies"
+          @change="annotatedContent = $event"
+        ></ontology-annotate>
+      </div>
       <div>
         <code>
           <pre>{{ annotatedContent }}</pre>

@@ -1,16 +1,6 @@
 ---
 outline: deep
 ---
-<script setup lang="ts">
-import "./../../ontology-elements/dist/index.js";
-
-import { ref } from 'vue'
-let autoCompleteValue = ref('')
-let selectedValue = ref('Homo sapiens	OBI	http://purl.obolibrary.org/obo/NCBITaxon_9606	class')
-let annotatedContent = ref('')
-let composedContent = ref('')
-</script>
-
 # Introduction
 
 ## Ontologies and controlled vocabulary

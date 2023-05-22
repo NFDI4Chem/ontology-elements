@@ -211,8 +211,9 @@ li.loupe:before {
   background: transparent;
 }
 
-.vc_textarea {
+.o_annotate_textarea {
   min-height: 100px;
+  margin-top: 5px;
   width: 100%;
   border: 1px solid #d7d7d7;
   box-shadow: none;
@@ -229,9 +230,10 @@ li.loupe:before {
 
 .contextmenu {
   position: absolute;
+  top: 0;
+  right: 0;
   background: #ffffff;
   color: #000;
-  margin-top: 5px;
   border: 1px solid #f1f1f2;
   box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
   border-radius: 0.2rem;
@@ -243,22 +245,22 @@ li.loupe:before {
   z-index: 100;
 }
 
-.contextmenu .contextmenu-item {
+.contextmenu .contextmenu_item {
   border-bottom: 1px solid #c3c3c3;
   padding: 8px;
 }
 
-.contextmenu .contextmenu-item:hover {
+.contextmenu .contextmenu_item:hover {
   cursor: pointer;
   background-color: #f1f1f2;
 }
 
-.contextmenu .contextmenu-item p {
+.contextmenu .contextmenu_item p {
   margin: 0;
   padding: 0;
 }
 
-.contextmenu .contextmenu-item .iri {
+.contextmenu .contextmenu_item .iri {
   margin: 0;
   width: 15rem;
   white-space: nowrap;
