@@ -156,8 +156,13 @@ function selectTerm(doc: any) {
   if (!hasShadowDOM) {
     data = { ontology: doc, context: cords.value }
   } else {
-    if(o_annotate_textarea){
-      let _cords = { x: 0, y: 0, start: o_annotate_textarea.value?.selectionStart, end: o_annotate_textarea.value?.selectionEnd }
+    if (o_annotate_textarea) {
+      let _cords = {
+        x: 0,
+        y: 0,
+        start: o_annotate_textarea.value?.selectionStart,
+        end: o_annotate_textarea.value?.selectionEnd
+      }
       data = { ontology: doc, context: _cords }
     }
   }
@@ -252,8 +257,8 @@ async function getSelectOptions(event: any) {
   border: 1px solid #d7d7d7;
   box-shadow: none;
   box-sizing: border_box;
-  padding: 12px 45px 12px 10px;
-  width: 100%;
+  padding: 12px 10px 12px 10px;
+  resize: none;
 }
 
 #mainInput {

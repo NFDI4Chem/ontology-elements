@@ -218,7 +218,7 @@ li.loupe:before {
   box-shadow: none;
   box-sizing: border-box;
   padding: 12px 45px 12px 10px;
-  width: 100%;
+  resize: none;
 }
 
 #mainInput {
@@ -266,4 +266,10 @@ li.loupe:before {
   text-overflow: ellipsis;
   word-wrap: break-word;
   padding: 0;
+}
+
+.o_term {
+  background-color: #cdcdcd;
+  border-radius: 4px;
+  padding: 1px 3px;
 }
