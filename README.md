@@ -6,6 +6,10 @@ Ontology-Elements project aims at developing custom ontology rich html elements 
 
 ![ontology-custom-element-why](./public/oe.png)
 
+Documentation: https://nfdi4chem.github.io/ontology-elements
+
+Demo: https://nfdi4chem.github.io/ontology-elements/demo.html
+
 ## Help Desk
 
 If you discover any issue or need any support please raise a ticket at our [Help Desk](https://helpdesk.nfdi4chem.de/).
