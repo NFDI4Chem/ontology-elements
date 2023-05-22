@@ -1,35 +1,46 @@
 <template>
-  <div>
-    <label v-if="label">{{ label }}</label>
-    <div>
+  <div :id="'o_annotate_wrapper_' + reference" class="o_annotate_wrapper">
+    <label class="o_annotate_label" v-if="label">{{ label }}</label>
+    <div v-if="!hasShadowDOM">
       <div
         @mouseup="checkSelection"
         @keyup="checkSelection"
         @input="onInput"
-        class="vc_textarea"
+        class="o_annotate_textarea"
+        ref="o_annotate_div"
         contenteditable="true"
       >
         {{ content }}
       </div>
-      <div class="contextmenu" :style="'left:' + cords.x + 'px; top:' + cords.y + 'px'">
-      <div class="contextmenu-item" v-if="matches.length == 0 && !loading">No matches found</div>
+    </div>
+    <div v-else>
+      <textarea
+        ref="o_annotate_textarea"
+        @mouseup="checkSelection"
+        @keyup="checkSelection"
+        @input="onInput"
+        class="o_annotate_textarea"
+        >{{ content }}</textarea
+      >
+    </div>
+    <div v-if="searchTerm != ''" class="contextmenu" :style="context_menu_styling">
+      <div class="contextmenu_item" v-if="matches.length == 0 && !loading">No matches found</div>
       <div v-else>
         <div
-          class="contextmenu-item"
+          class="contextmenu_item"
           v-for="doc in matches"
           :key="doc['short_label']"
           role="option"
-          tabindex="-1"
-          aria-selected="false"
-          aria-setsize="3"
-          aria-posinset="0"
+          tabindex="_1"
+          aria_selected="false"
+          aria_setsize="3"
+          aria_posinset="0"
           @click.capture.stop.prevent="selectTerm(doc)"
         >
-          <p v-html="highlight(doc['label'])"></p>
-          <small class="iri">{{ doc['ontology_prefix'] }}:{{ doc['iri'] }}</small>
+          <p v-html="doc['label']"></p>
+          <small>{{ doc['ontology_prefix'] }}:{{ doc['short_form'] }}</small>
         </div>
       </div>
-    </div>
     </div>
     <div>
       <div v-if="loading" style="float: right">
@@ -42,10 +53,23 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, computed, reactive } from 'vue'
+import { ref, computed, reactive, onMounted, type HtmlHTMLAttributes } from 'vue'
 
+const reference = (Math.random() + 1).toString(36).substring(7)
+const o_annotate_textarea = ref<HTMLTextAreaElement | null>(null)
+const hasShadowDOM = ref(false)
 const emit = defineEmits(['change'])
-
+let content = ref('')
+let cords: any = ref({ x: -1000, y: 0, start: -1, end: -1 })
+let searchTerm = ref('')
+let loading = ref(false)
+let matches = ref([])
+type OntologyType = {
+  ontology: any
+  context: any
+}
+let selectedTerms: Array<OntologyType> = reactive([])
+const pendingRequests = new WeakMap()
 const props = defineProps({
   label: {
     type: String,
@@ -74,20 +98,23 @@ const props = defineProps({
   }
 })
 
-let content = ref('')
+const context_menu_styling = computed(() => {
+  return 'left:' + cords.value.x + 'px; top:' + cords.value.y + 'px'
+})
 
 const bratOnto = computed(() => {
-  if (!content.value) {
+  let _content = hasShadowDOM ? o_annotate_textarea.value?.value : content.value
+  if (!_content) {
     return null
   }
   if (props.format && props.format == 'json') {
     return {
-      text: content.value,
+      text: _content,
       ontology: selectedTerms
     }
   } else {
     return (
-      content.value +
+      _content +
       '\n$$$$\n' +
       selectedTerms
         .map(
@@ -109,22 +136,12 @@ const bratOnto = computed(() => {
   }
 })
 
-let searchTerm = ref('')
-
-let loading = ref(false)
-
-let matches = ref([])
-
-type MyType = {
-  ontology: any
-  context: any
-}
-
-let selectedTerms: Array<MyType> = reactive([])
-
-const pendingRequests = new WeakMap()
-
-let cords: any = ref({ x: -1000, y: 0, start: -1, end: -1 })
+onMounted(() => {
+  var el = document.getElementsByTagName('ontology-annotate')[0]
+  if (!!el?.shadowRoot) {
+    hasShadowDOM.value = true
+  }
+})
 
 function onInput(e: any) {
   content.value = e.target.innerText
@@ -132,35 +149,31 @@ function onInput(e: any) {
 }
 
 function selectTerm(doc: any) {
-  let data = { ontology: doc, context: cords.value }
+  let data = {
+    ontology: {},
+    context: {}
+  }
+  if (!hasShadowDOM) {
+    data = { ontology: doc, context: cords.value }
+  } else {
+    if(o_annotate_textarea){
+      let _cords = { x: 0, y: 0, start: o_annotate_textarea.value?.selectionStart, end: o_annotate_textarea.value?.selectionEnd }
+      data = { ontology: doc, context: _cords }
+    }
+  }
   selectedTerms.push(data)
-  cords.value = { x: -1000, y: 0, start: -1, end: -1 }
   matches.value = []
   searchTerm.value = ''
   emit('change', bratOnto.value)
-  // var selectionRange = window.getSelection()?.getRangeAt(0);
-  // var selectedText = selectionRange?.extractContents();
-  // var span = document.createElement("span");
-  // span.style.backgroundColor = "yellow";
-  // span.appendChild(selectedText!);
-  // selectionRange?.insertNode(span);
 }
-
-// function onBlur() {
-//   searchTerm.value = ''
-//   matches.value = []
-//   cords.value = { x: -1000, y: 0, start: -1, end: -1 }
-// }
 
 function checkSelection(e: any) {
   searchTerm.value = ''
   if (window.getSelection) {
     var selection = window.getSelection()
-    console.log(selection)
     searchTerm.value = selection?.toString()!
     if (searchTerm.value && searchTerm.value != '') {
       matches.value = []
-      cords.value = { x: -1000, y: 0, start: -1, end: -1 }
       getSelectionCoords(selection)
       getSelectOptions(e)
     } else {
@@ -170,26 +183,16 @@ function checkSelection(e: any) {
   }
 }
 
-function highlight(content: string) {
-  if (!searchTerm.value) {
-    return content
-  }
-  return content.replace(new RegExp(searchTerm.value, 'gi'), (match) => {
-    return '<span class="highlightText">' + match + '</span>'
-  })
-}
-
 function getSelectionCoords(sel: any, atStart: boolean = true) {
   if (!sel?.rangeCount) return null
   let range = sel.getRangeAt(0).cloneRange()
-  console.log(range.getClientRects())
   if (!range.getClientRects) return null
   range.collapse(atStart)
   let rects = range.getClientRects()
-  if (rects.length <= 0){
+  if (rects.length <= 0) {
     cords.value.x = 0
     cords.value.y = 0
-  }else{
+  } else {
     let rect = rects[0]
     cords.value.start = sel.anchorOffset
     cords.value.end = sel.focusOffset
@@ -226,7 +229,7 @@ async function getSelectOptions(event: any) {
 
   const url = 'https://service.tib.eu/ts4tib/api/select?q='
   const queries = encodeURI(
-    '&ontology=' +
+    '&ontolog-y=' +
       ontologies +
       '&fieldList=iri,label,short_form,obo_id,ontology_name,ontology_prefix,description,type&obsoletes=false&local=false&rows=10'
   )
@@ -243,12 +246,12 @@ async function getSelectOptions(event: any) {
 }
 </script>
 <style scoped>
-.vc_textarea {
+.o_annotate_textarea {
   min-height: 100px;
   width: 100%;
   border: 1px solid #d7d7d7;
   box-shadow: none;
-  box-sizing: border-box;
+  box-sizing: border_box;
   padding: 12px 45px 12px 10px;
   width: 100%;
 }
@@ -261,41 +264,42 @@ async function getSelectOptions(event: any) {
 
 .contextmenu {
   position: absolute;
+  top: 0;
+  right: 0;
   background: #ffffff;
   color: #000;
-  margin-top: 5px;
   border: 1px solid #f1f1f2;
-  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
-  border-radius: 0.2rem;
   width: 15rem;
-  max-width: calc(100vw - 2rem);
+  max-width: calc(100vw _ 2rem);
   max-height: 300px;
   overflow-y: scroll;
   overflow-x: hidden;
   z-index: 100;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.2rem;
 }
 
-.contextmenu .contextmenu-item {
+.contextmenu .contextmenu_item {
   border-bottom: 1px solid #c3c3c3;
   padding: 8px;
 }
 
-.contextmenu .contextmenu-item:hover {
+.contextmenu .contextmenu_item:hover {
   cursor: pointer;
   background-color: #f1f1f2;
 }
 
-.contextmenu .contextmenu-item p {
+.contextmenu .contextmenu_item p {
   margin: 0;
   padding: 0;
 }
 
-.contextmenu .contextmenu-item .iri {
+.contextmenu .contextmenu_item .iri {
   margin: 0;
   width: 15rem;
   white-space: nowrap;
   text-overflow: ellipsis;
-  word-wrap: break-word;
+  word-wrap: break_word;
   padding: 0;
 }
 </style>

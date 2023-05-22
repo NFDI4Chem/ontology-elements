@@ -5,7 +5,7 @@ export default defineConfig({
   description: "ontology-elements docs",
   base: '/ontology-elements/',
   themeConfig: {
-    logo: '/public/oe-logo-color.svg',
+    logo: '/oe-logo-color.svg',
 
     siteTitle: '',
 
@@ -59,5 +59,5 @@ export default defineConfig({
     footer: {
       message: 'Licensed under the <a href="https://github.com/NFDI4Chem/ontology-elements/blob/main/LICENSE">MIT License</a>.',
     }
-  }
+  },
 })

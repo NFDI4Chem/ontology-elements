@@ -21,17 +21,10 @@ let value = ref("Seven previously undescribed diterpenoids, tinocrisposides A–
     @change="value = $event.detail[0]"
 ></ontology-annotate>
 </div>
-
 <br/>
-
 <span v-if="value && value != ''">
 <br/>Output:
-
----
-
-<pre class="custom-code-block"><code>{{ value }}</code></pre>
-
-</span>
+<pre class="custom-code-block"><code>{{ value }}</code></pre></span>
 <br/>
 
 ---
@@ -44,6 +37,7 @@ let value = ref("Seven previously undescribed diterpenoids, tinocrisposides A–
     label="Input field (ontology driven)"
     info="Search terms across ontologies"
     modelValue="value"
+    @change="value = $event.detail[0]"
 ></ontology-annotate>
 ```
 

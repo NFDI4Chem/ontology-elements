@@ -9,8 +9,11 @@ export const OntologyAutoComplete = defineCustomElement(VueOntologyAutoComplete)
 export const OntologyAnnotate = defineCustomElement(VueOntologyAnnotate)
 export const OntologyCompose = defineCustomElement(VueOntologyCompose)
 
-OntologyAnnotation.define('ontology-annotation', OntologyAnnotation)
-OntologyAutoComplete.define('ontology-autocomplete', OntologyAutoComplete)
-OntologyAnnotate.define('ontology-annotate', OntologyAnnotate)
-OntologyCompose.define('ontology-compose', OntologyCompose)
+if (typeof window !== "undefined") {
+    let customElementRegistry = window.customElements;
 
+    customElementRegistry.define('ontology-annotation', OntologyAnnotation)
+    customElementRegistry.define('ontology-autocomplete', OntologyAutoComplete)
+    customElementRegistry.define('ontology-annotate', OntologyAnnotate)
+    customElementRegistry.define('ontology-compose', OntologyCompose)
+}
