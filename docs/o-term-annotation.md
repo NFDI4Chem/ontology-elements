@@ -5,7 +5,7 @@ outline: deep
 import "./../dist/index.js";
 </script>
 
-# Annotation (read-only)
+# Annotation Term (read-only)
 
 Ontology elements provide an annotation component that renders the annotation in a user-friendly format.
 

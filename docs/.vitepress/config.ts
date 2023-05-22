@@ -26,7 +26,8 @@ export default defineConfig({
       {
         text: 'Components',
         items: [
-          { text: 'Annotation', link: '/o-annotation' },
+          { text: 'Annotated Term', link: '/o-term-annotation' },
+          { text: 'Text Annotation', link: '/o-text-annotation' },
           { text: 'Autocomplete (Input)', link: '/o-autocomplete' },
           { text: 'Compose (Textarea)', link: '/o-compose' },
           { text: 'Annotate (Textarea)', link: '/o-annotate' },

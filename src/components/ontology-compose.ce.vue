@@ -209,8 +209,8 @@ function updateAutoCompleteText() {
   border: 1px solid #d7d7d7;
   box-shadow: none;
   box-sizing: border-box;
-  padding: 12px 45px 12px 10px;
-  width: 100%;
+  padding: 12px 10px 12px 10px;
+  resize: none;
 }
 
 #mainInput {

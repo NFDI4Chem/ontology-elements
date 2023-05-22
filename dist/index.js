@@ -1,28 +1,51 @@
-import { defineComponent as L, computed as O, openBlock as l, createElementBlock as r, unref as n, toDisplayString as b, createCommentVNode as T, ref as m, withDirectives as V, createElementVNode as d, isRef as U, withModifiers as A, vModelText as B, Fragment as N, renderList as K, reactive as F, onMounted as J, normalizeStyle as G, pushScopeId as Q, popScopeId as X, defineCustomElement as R } from "vue";
-const Y = ["href"], Z = /* @__PURE__ */ L({
-  __name: "ontology-annotation.ce",
+import { defineComponent as E, computed as q, openBlock as r, createElementBlock as i, unref as l, toDisplayString as k, createCommentVNode as C, ref as w, withDirectives as H, createElementVNode as p, isRef as U, withModifiers as R, vModelText as B, Fragment as N, renderList as K, reactive as F, onMounted as J, normalizeStyle as G, pushScopeId as Q, popScopeId as X, defineCustomElement as L } from "vue";
+const Y = ["href"], Z = /* @__PURE__ */ E({
+  __name: "ontology-term-annotation.ce",
   props: {
     annotation: null
   },
   setup(e) {
-    const y = e, _ = O(() => y.annotation ? y.annotation.split("	")[0] : ""), t = O(() => y.annotation ? y.annotation.split("	")[2] : ""), o = O(() => y.annotation ? y.annotation.split("	")[1] : "");
-    return (S, C) => e.annotation && e.annotation != "" ? (l(), r("a", {
+    const c = e, x = q(() => c.annotation ? c.annotation.split("	")[0] : ""), t = q(() => c.annotation ? c.annotation.split("	")[2] : ""), o = q(() => c.annotation ? c.annotation.split("	")[1] : "");
+    return ($, T) => e.annotation && e.annotation != "" ? (r(), i("a", {
       key: 0,
-      href: n(t),
+      href: l(t),
       target: "_blank"
-    }, b(n(o)) + ": " + b(n(_)), 9, Y)) : T("", !0);
+    }, k(l(o)) + ": " + k(l(x)), 9, Y)) : C("", !0);
   }
-}), ee = { class: "auto-search-wrapper" }, te = { key: 0 }, oe = ["onInput", "placeholder"], ae = { key: 1 }, ne = {
+}), ee = ["innerHTML"], te = /* @__PURE__ */ E({
+  __name: "ontology-text-annotation.ce",
+  props: {
+    annotation: null
+  },
+  setup(e) {
+    const c = e, x = q(() => c.annotation ? c.annotation.split("$$$$")[0] : ""), t = q(() => {
+      let o = `${x.value}`, $ = c.annotation ? c.annotation.split("$$$$")[1].split(/\r?\n/).filter((n) => n) : [], T = [];
+      return $.forEach((n) => {
+        let a = n.split("	"), f = a[1].split(" "), u = {};
+        u.value = o.substring(parseInt(f[1]), parseInt(f[2])), u.class = a[0], u.ontology = f[0], u.ontology_term = a[2], u.iri = a[3], T.push(u);
+      }), T.forEach((n) => {
+        o = o.replace(n.value, '<span class="o_term"><a target="_blank" href=' + n.iri + ">" + n.value + "</a></span>");
+      }), o;
+    });
+    return (o, $) => (r(), i("div", { innerHTML: l(t) }, null, 8, ee));
+  }
+}), oe = `.o_term[data-v-6b855a10]{background-color:#cdcdcd;border-radius:4px;padding:1px 3px}
+`, j = (e, c) => {
+  const x = e.__vccOpts || e;
+  for (const [t, o] of c)
+    x[t] = o;
+  return x;
+}, ae = /* @__PURE__ */ j(te, [["styles", [oe]], ["__scopeId", "data-v-6b855a10"]]), ne = { class: "auto-search-wrapper" }, le = { key: 0 }, re = ["onInput", "placeholder"], ie = { key: 1 }, se = {
   key: 2,
   class: "auto-results-wrapper auto-is-active"
-}, le = {
+}, ue = {
   tabindex: "0",
   role: "listbox"
-}, re = ["onClick"], ie = ["innerHTML"], se = ["innerHTML"], ue = {
+}, ce = ["onClick"], de = ["innerHTML"], pe = ["innerHTML"], fe = {
   key: 3,
   type: "button",
   "aria-label": "clear the search query"
-}, de = /* @__PURE__ */ L({
+}, ve = /* @__PURE__ */ E({
   __name: "ontology-autocomplete.ce",
   props: {
     label: {
@@ -52,87 +75,82 @@ const Y = ["href"], Z = /* @__PURE__ */ L({
     }
   },
   emits: ["change"],
-  setup(e, { emit: y }) {
-    const _ = e;
-    let t = m(""), o = m([]);
-    async function S() {
+  setup(e, { emit: c }) {
+    const x = e;
+    let t = w(""), o = w([]);
+    async function $() {
       if (t.value === "")
         return o.value = [], [];
-      let c = t.value.indexOf(":"), f = "", v = null;
-      c < 0 ? (f = _.ontologies, v = t.value) : (v = t.value.split(":")[1], f = t.value.split(":")[0]);
-      const g = "https://service.tib.eu/ts4tib/api/select?q=", I = encodeURI(
-        "&ontology=" + f + "&fieldList=iri,label,short_form,obo_id,ontology_name,ontology_prefix,description,type&obsoletes=false&local=false&rows=10"
+      let v = t.value.indexOf(":"), h = "", m = null;
+      v < 0 ? (h = x.ontologies, m = t.value) : (m = t.value.split(":")[1], h = t.value.split(":")[0]);
+      const y = "https://service.tib.eu/ts4tib/api/select?q=", O = encodeURI(
+        "&ontology=" + h + "&fieldList=iri,label,short_form,obo_id,ontology_name,ontology_prefix,description,type&obsoletes=false&local=false&rows=10"
       );
-      (await fetch(`${g}${v}${I}`)).json().then((M) => {
-        o.value = M.response.docs;
+      (await fetch(`${y}${m}${O}`)).json().then((I) => {
+        o.value = I.response.docs;
       });
     }
-    function C(c) {
-      return t.value ? c.replace(new RegExp(t.value, "gi"), (f) => '<span class="highlightText">' + f + "</span>") : c;
+    function T(v) {
+      return t.value ? v.replace(new RegExp(t.value, "gi"), (h) => '<span class="highlightText">' + h + "</span>") : v;
     }
-    function s(c) {
-      return c ? c.join("") : "";
+    function n(v) {
+      return v ? v.join("") : "";
     }
-    let a = m(null);
-    const w = O(() => a.value ? _.format && _.format == "json" ? a.value : a.value ? a.value.label + "	" + a.value.ontology_prefix + "	" + a.value.iri + "	" + a.value.type : "" : null), k = (c) => {
-      a.value = c, t.value = c.label, y("change", w.value), o.value = [];
+    let a = w(null);
+    const f = q(() => a.value ? x.format && x.format == "json" ? a.value : a.value ? a.value.label + "	" + a.value.ontology_prefix + "	" + a.value.iri + "	" + a.value.type : "" : null), u = (v) => {
+      a.value = v, t.value = v.label, c("change", f.value), o.value = [];
     };
-    return (c, f) => (l(), r("div", ee, [
-      e.label ? (l(), r("label", te, b(e.label), 1)) : T("", !0),
-      V(d("input", {
+    return (v, h) => (r(), i("div", ne, [
+      e.label ? (r(), i("label", le, k(e.label), 1)) : C("", !0),
+      H(p("input", {
         type: "text",
         id: "search",
-        "onUpdate:modelValue": f[0] || (f[0] = (v) => U(t) ? t.value = v : t = v),
-        onInput: A(S, ["stop"]),
+        "onUpdate:modelValue": h[0] || (h[0] = (m) => U(t) ? t.value = m : t = m),
+        onInput: R($, ["stop"]),
         placeholder: e.placeholder,
         autocomplete: "off"
-      }, null, 40, oe), [
-        [B, n(t)]
+      }, null, 40, re), [
+        [B, l(t)]
       ]),
-      e.info && n(o).length == 0 ? (l(), r("p", ae, b(e.info), 1)) : (l(), r("div", ne, [
-        d("ul", le, [
-          (l(!0), r(N, null, K(n(o), (v) => (l(), r("li", {
-            key: v.short_label,
+      e.info && l(o).length == 0 ? (r(), i("p", ie, k(e.info), 1)) : (r(), i("div", se, [
+        p("ul", ue, [
+          (r(!0), i(N, null, K(l(o), (m) => (r(), i("li", {
+            key: m.short_label,
             role: "option",
             tabindex: "-1",
             "aria-selected": "false",
             "aria-setsize": "3",
             "aria-posinset": "0",
-            onClick: (g) => k(v)
+            onClick: (y) => u(m)
           }, [
-            d("p", {
-              innerHTML: C(v.label)
-            }, null, 8, ie),
-            d("p", null, [
-              d("small", {
-                innerHTML: s(v.description)
-              }, null, 8, se)
+            p("p", {
+              innerHTML: T(m.label)
+            }, null, 8, de),
+            p("p", null, [
+              p("small", {
+                innerHTML: n(m.description)
+              }, null, 8, pe)
             ]),
-            d("small", null, b(v.ontology_prefix) + ":" + b(v.iri), 1)
-          ], 8, re))), 128))
+            p("small", null, k(m.ontology_prefix) + ":" + k(m.iri), 1)
+          ], 8, ce))), 128))
         ])
       ])),
-      n(t) != "" && n(o).length > 0 ? (l(), r("button", ue)) : T("", !0)
+      l(t) != "" && l(o).length > 0 ? (r(), i("button", fe)) : C("", !0)
     ]));
   }
-}), ce = `[data-v-d4fc57ea]:root{--close-button: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.984 6.422 13.406 12l5.578 5.578-1.406 1.406L12 13.406l-5.578 5.578-1.406-1.406L10.594 12 5.016 6.422l1.406-1.406L12 10.594l5.578-5.578z'/%3E%3C/svg%3E");--loupe-icon: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23929292' d='M16.041 15.856a.995.995 0 0 0-.186.186A6.97 6.97 0 0 1 11 18c-1.933 0-3.682-.782-4.95-2.05S4 12.933 4 11s.782-3.682 2.05-4.95S9.067 4 11 4s3.682.782 4.95 2.05S18 9.067 18 11a6.971 6.971 0 0 1-1.959 4.856zm5.666 4.437-3.675-3.675A8.967 8.967 0 0 0 20 11c0-2.485-1.008-4.736-2.636-6.364S13.485 2 11 2 6.264 3.008 4.636 4.636 2 8.515 2 11s1.008 4.736 2.636 6.364S8.515 20 11 20a8.967 8.967 0 0 0 5.618-1.968l3.675 3.675a.999.999 0 1 0 1.414-1.414z'/%3E%3C/svg%3E")}.auto-search-wrapper[data-v-d4fc57ea]{display:block;position:relative;width:100%}.auto-search-wrapper p[data-v-d4fc57ea]{margin:0;padding:0;font-size:1.1em}.auto-search-wrapper p .highlightText[data-v-d4fc57ea]{font-weight:700}.auto-search-wrapper input[data-v-d4fc57ea]{border:1px solid #d7d7d7;box-shadow:none;box-sizing:border-box;font-size:16px;padding:12px 45px 12px 10px;width:100%}.auto-search-wrapper input[data-v-d4fc57ea]:focus{border:1px solid #858585;outline:none}.auto-search-wrapper input[data-v-d4fc57ea]::-ms-clear{display:none}.auto-search-wrapper ul[data-v-d4fc57ea]{list-style:none;margin:0;overflow:auto;padding:0}.auto-search-wrapper ul li[data-v-d4fc57ea]{cursor:pointer;margin:0;overflow:hidden;padding:10px;position:relative;border:1px dotted #f1f1f2}.auto-search-wrapper ul li[data-v-d4fc57ea]:hover{background-color:#f1f1f2}.auto-search-wrapper ul li[data-v-d4fc57ea]:not(:last-child){border-top:none}.auto-search-wrapper ul li[disabled][data-v-d4fc57ea]{background:#ececec;opacity:.5;pointer-events:none}.auto-search-wrapper .auto-expanded[data-v-d4fc57ea]{border:1px solid #858585;outline:none}.auto-search-wrapper.loupe[data-v-d4fc57ea]:before{filter:invert(60%)}.auto-is-loading[data-v-d4fc57ea]:after{animation:auto-spinner-d4fc57ea .6s linear infinite;border-color:#d9d9d9 grey grey #d9d9d9;border-radius:50%;border-style:solid;border-width:2px;bottom:0;box-sizing:border-box;content:"";height:20px;margin:auto;position:absolute;right:10px;top:0;width:20px}.auto-is-loading .auto-clear[data-v-d4fc57ea]{display:none}@keyframes auto-spinner-d4fc57ea{to{transform:rotate(1turn)}}li.loupe[data-v-d4fc57ea]:before{bottom:auto;top:15px}.loupe input[data-v-d4fc57ea]{padding:12px 45px 12px 35px}.loupe[data-v-d4fc57ea]:before{background-image:var(--loupe-icon);bottom:0;content:"";height:17px;left:10px;margin:auto;position:absolute;top:0;width:17px}.auto-selected[data-v-d4fc57ea]:before{opacity:1}.auto-clear[data-v-d4fc57ea]{align-items:center;background-color:transparent;border:none;bottom:0;cursor:pointer;display:flex;height:auto;justify-content:center;margin:auto;position:absolute;right:0;top:0;width:40px}.auto-clear[data-v-d4fc57ea]:before{content:var(--close-button);height:24px;line-height:100%;width:24px}.auto-clear span[data-v-d4fc57ea]{display:none}.auto-results-wrapper[data-v-d4fc57ea]{background-color:#fff;border:1px solid #858585;border-top:none;box-sizing:border-box;display:none;overflow:hidden}.auto-results-wrapper ul>.loupe[data-v-d4fc57ea]{padding-left:40px}.auto-results-wrapper.auto-is-active[data-v-d4fc57ea]{display:block;margin-top:-1px;position:absolute;width:100%;z-index:99999}.auto-selected[data-v-d4fc57ea]{background-color:#e6e6e6}.auto-selected+li[data-v-d4fc57ea]:before{border-top:none}.auto-error[data-v-d4fc57ea]{border:1px solid #ff3838}.auto-error[data-v-d4fc57ea]::placeholder{color:#f66;opacity:1}.hidden[data-v-d4fc57ea]{display:none}
-`, H = (e, y) => {
-  const _ = e.__vccOpts || e;
-  for (const [t, o] of y)
-    _[t] = o;
-  return _;
-}, pe = /* @__PURE__ */ H(de, [["styles", [ce]], ["__scopeId", "data-v-d4fc57ea"]]), fe = (e) => (Q("data-v-bc5db457"), e = e(), X(), e), ve = ["id"], ge = {
+}), ge = `[data-v-d4fc57ea]:root{--close-button: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.984 6.422 13.406 12l5.578 5.578-1.406 1.406L12 13.406l-5.578 5.578-1.406-1.406L10.594 12 5.016 6.422l1.406-1.406L12 10.594l5.578-5.578z'/%3E%3C/svg%3E");--loupe-icon: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23929292' d='M16.041 15.856a.995.995 0 0 0-.186.186A6.97 6.97 0 0 1 11 18c-1.933 0-3.682-.782-4.95-2.05S4 12.933 4 11s.782-3.682 2.05-4.95S9.067 4 11 4s3.682.782 4.95 2.05S18 9.067 18 11a6.971 6.971 0 0 1-1.959 4.856zm5.666 4.437-3.675-3.675A8.967 8.967 0 0 0 20 11c0-2.485-1.008-4.736-2.636-6.364S13.485 2 11 2 6.264 3.008 4.636 4.636 2 8.515 2 11s1.008 4.736 2.636 6.364S8.515 20 11 20a8.967 8.967 0 0 0 5.618-1.968l3.675 3.675a.999.999 0 1 0 1.414-1.414z'/%3E%3C/svg%3E")}.auto-search-wrapper[data-v-d4fc57ea]{display:block;position:relative;width:100%}.auto-search-wrapper p[data-v-d4fc57ea]{margin:0;padding:0;font-size:1.1em}.auto-search-wrapper p .highlightText[data-v-d4fc57ea]{font-weight:700}.auto-search-wrapper input[data-v-d4fc57ea]{border:1px solid #d7d7d7;box-shadow:none;box-sizing:border-box;font-size:16px;padding:12px 45px 12px 10px;width:100%}.auto-search-wrapper input[data-v-d4fc57ea]:focus{border:1px solid #858585;outline:none}.auto-search-wrapper input[data-v-d4fc57ea]::-ms-clear{display:none}.auto-search-wrapper ul[data-v-d4fc57ea]{list-style:none;margin:0;overflow:auto;padding:0}.auto-search-wrapper ul li[data-v-d4fc57ea]{cursor:pointer;margin:0;overflow:hidden;padding:10px;position:relative;border:1px dotted #f1f1f2}.auto-search-wrapper ul li[data-v-d4fc57ea]:hover{background-color:#f1f1f2}.auto-search-wrapper ul li[data-v-d4fc57ea]:not(:last-child){border-top:none}.auto-search-wrapper ul li[disabled][data-v-d4fc57ea]{background:#ececec;opacity:.5;pointer-events:none}.auto-search-wrapper .auto-expanded[data-v-d4fc57ea]{border:1px solid #858585;outline:none}.auto-search-wrapper.loupe[data-v-d4fc57ea]:before{filter:invert(60%)}.auto-is-loading[data-v-d4fc57ea]:after{animation:auto-spinner-d4fc57ea .6s linear infinite;border-color:#d9d9d9 grey grey #d9d9d9;border-radius:50%;border-style:solid;border-width:2px;bottom:0;box-sizing:border-box;content:"";height:20px;margin:auto;position:absolute;right:10px;top:0;width:20px}.auto-is-loading .auto-clear[data-v-d4fc57ea]{display:none}@keyframes auto-spinner-d4fc57ea{to{transform:rotate(1turn)}}li.loupe[data-v-d4fc57ea]:before{bottom:auto;top:15px}.loupe input[data-v-d4fc57ea]{padding:12px 45px 12px 35px}.loupe[data-v-d4fc57ea]:before{background-image:var(--loupe-icon);bottom:0;content:"";height:17px;left:10px;margin:auto;position:absolute;top:0;width:17px}.auto-selected[data-v-d4fc57ea]:before{opacity:1}.auto-clear[data-v-d4fc57ea]{align-items:center;background-color:transparent;border:none;bottom:0;cursor:pointer;display:flex;height:auto;justify-content:center;margin:auto;position:absolute;right:0;top:0;width:40px}.auto-clear[data-v-d4fc57ea]:before{content:var(--close-button);height:24px;line-height:100%;width:24px}.auto-clear span[data-v-d4fc57ea]{display:none}.auto-results-wrapper[data-v-d4fc57ea]{background-color:#fff;border:1px solid #858585;border-top:none;box-sizing:border-box;display:none;overflow:hidden}.auto-results-wrapper ul>.loupe[data-v-d4fc57ea]{padding-left:40px}.auto-results-wrapper.auto-is-active[data-v-d4fc57ea]{display:block;margin-top:-1px;position:absolute;width:100%;z-index:99999}.auto-selected[data-v-d4fc57ea]{background-color:#e6e6e6}.auto-selected+li[data-v-d4fc57ea]:before{border-top:none}.auto-error[data-v-d4fc57ea]{border:1px solid #ff3838}.auto-error[data-v-d4fc57ea]::placeholder{color:#f66;opacity:1}.hidden[data-v-d4fc57ea]{display:none}
+`, he = /* @__PURE__ */ j(ve, [["styles", [ge]], ["__scopeId", "data-v-d4fc57ea"]]), xe = (e) => (Q("data-v-aaa7ce3e"), e = e(), X(), e), me = ["id"], ye = {
   key: 0,
   class: "o_annotate_label"
-}, he = { key: 1 }, xe = { key: 2 }, me = {
+}, _e = { key: 1 }, be = { key: 2 }, we = {
   key: 0,
   class: "contextmenu_item"
-}, be = { key: 1 }, ye = ["onClickCapture"], _e = ["innerHTML"], we = {
+}, ke = { key: 1 }, $e = ["onClickCapture"], Te = ["innerHTML"], Se = {
   key: 0,
   style: { float: "right" }
-}, ke = /* @__PURE__ */ fe(() => /* @__PURE__ */ d("i", null, "...loading", -1)), $e = [
-  ke
-], Se = { key: 0 }, Te = /* @__PURE__ */ L({
+}, Ce = /* @__PURE__ */ xe(() => /* @__PURE__ */ p("i", null, "...loading", -1)), qe = [
+  Ce
+], Me = { key: 0 }, Ie = /* @__PURE__ */ E({
   __name: "ontology-annotate.ce",
   props: {
     label: {
@@ -162,135 +180,135 @@ const Y = ["href"], Z = /* @__PURE__ */ L({
     }
   },
   emits: ["change"],
-  setup(e, { emit: y }) {
-    const _ = e, t = (Math.random() + 1).toString(36).substring(7), o = m(null), S = m(!1);
-    let C = m(""), s = m({ x: -1e3, y: 0, start: -1, end: -1 }), a = m(""), w = m(!1), k = m([]), c = F([]);
-    const f = /* @__PURE__ */ new WeakMap(), v = O(() => "left:" + s.value.x + "px; top:" + s.value.y + "px"), g = O(() => {
-      let i = S ? o.value?.value : C.value;
-      return i ? _.format && _.format == "json" ? {
-        text: i,
-        ontology: c
-      } : i + `
+  setup(e, { emit: c }) {
+    const x = e, t = (Math.random() + 1).toString(36).substring(7), o = w(null), $ = w(!1);
+    let T = w(""), n = w({ x: -1e3, y: 0, start: -1, end: -1 }), a = w(""), f = w(!1), u = w([]), v = F([]);
+    const h = /* @__PURE__ */ new WeakMap(), m = q(() => "left:" + n.value.x + "px; top:" + n.value.y + "px"), y = q(() => {
+      let s = $ ? o.value?.value : T.value;
+      return s ? x.format && x.format == "json" ? {
+        text: s,
+        ontology: v
+      } : s + `
 $$$$
-` + c.map(
-        (u) => u.ontology.type[0] + "	" + u.ontology.ontology_prefix + " " + u.context.start + " " + u.context.end + "	" + u.ontology.label + "	" + u.ontology.iri
+` + v.map(
+        (d) => d.ontology.type[0] + "	" + d.ontology.ontology_prefix + " " + d.context.start + " " + d.context.end + "	" + d.ontology.label + "	" + d.ontology.iri
       ).join(`
 `) : null;
     });
     J(() => {
-      var i = document.getElementsByTagName("ontology-annotate")[0];
-      i?.shadowRoot && (S.value = !0);
+      var s = document.getElementsByTagName("ontology-annotate")[0];
+      s?.shadowRoot && ($.value = !0);
     });
-    function I(i) {
-      C.value = i.target.innerText, y("change", g.value);
+    function O(s) {
+      T.value = s.target.innerText, c("change", y.value);
     }
-    function z(i) {
-      let u = {
+    function z(s) {
+      let d = {
         ontology: {},
         context: {}
       };
-      if (!S)
-        u = { ontology: i, context: s.value };
+      if (!$)
+        d = { ontology: s, context: n.value };
       else if (o) {
-        let h = { x: 0, y: 0, start: o.value?.selectionStart, end: o.value?.selectionEnd };
-        u = { ontology: i, context: h };
+        let _ = { x: 0, y: 0, start: o.value?.selectionStart, end: o.value?.selectionEnd };
+        d = { ontology: s, context: _ };
       }
-      c.push(u), k.value = [], a.value = "", y("change", g.value);
+      v.push(d), u.value = [], a.value = "", c("change", y.value);
     }
-    function M(i) {
+    function I(s) {
       if (a.value = "", window.getSelection) {
-        var u = window.getSelection();
-        a.value = u?.toString(), a.value && a.value != "" ? (k.value = [], j(u), E(i)) : (s.value = { x: -1e3, y: 0, start: -1, end: -1 }, k.value = []);
+        var d = window.getSelection();
+        a.value = d?.toString(), a.value && a.value != "" ? (u.value = [], D(d), A(s)) : (n.value = { x: -1e3, y: 0, start: -1, end: -1 }, u.value = []);
       }
     }
-    function j(i, u = !0) {
-      if (!i?.rangeCount)
+    function D(s, d = !0) {
+      if (!s?.rangeCount)
         return null;
-      let h = i.getRangeAt(0).cloneRange();
-      if (!h.getClientRects)
+      let _ = s.getRangeAt(0).cloneRange();
+      if (!_.getClientRects)
         return null;
-      h.collapse(u);
-      let $ = h.getClientRects();
-      if ($.length <= 0)
-        s.value.x = 0, s.value.y = 0;
+      _.collapse(d);
+      let S = _.getClientRects();
+      if (S.length <= 0)
+        n.value.x = 0, n.value.y = 0;
       else {
-        let p = $[0];
-        s.value.start = i.anchorOffset, s.value.end = i.focusOffset, s.value.x = p.x, s.value.y = p.y + $[0]?.height;
+        let g = S[0];
+        n.value.start = s.anchorOffset, n.value.end = s.focusOffset, n.value.x = g.x, n.value.y = g.y + S[0]?.height;
       }
     }
-    async function E(i) {
+    async function A(s) {
       if (a.value === "")
-        return k.value = [], [];
-      let u = a.value.indexOf(":"), h = "", $ = null;
-      u < 0 ? (h = _.ontologies, $ = a.value) : ($ = a.value.split(":")[1], h = a.value.split(":")[0]);
-      const p = i.currentTarget, x = f.get(p);
-      x && x.abort();
-      const q = new AbortController();
-      f.set(p, q);
-      const D = "https://service.tib.eu/ts4tib/api/select?q=", W = encodeURI(
-        "&ontolog-y=" + h + "&fieldList=iri,label,short_form,obo_id,ontology_name,ontology_prefix,description,type&obsoletes=false&local=false&rows=10"
+        return u.value = [], [];
+      let d = a.value.indexOf(":"), _ = "", S = null;
+      d < 0 ? (_ = x.ontologies, S = a.value) : (S = a.value.split(":")[1], _ = a.value.split(":")[0]);
+      const g = s.currentTarget, b = h.get(g);
+      b && b.abort();
+      const M = new AbortController();
+      h.set(g, M);
+      const V = "https://service.tib.eu/ts4tib/api/select?q=", W = encodeURI(
+        "&ontolog-y=" + _ + "&fieldList=iri,label,short_form,obo_id,ontology_name,ontology_prefix,description,type&obsoletes=false&local=false&rows=10"
       );
-      w.value = !0, (await fetch(`${D}${$}${W}`, { signal: q.signal })).json().then((P) => {
-        f.delete(p), k.value = P.response.docs, w.value = !1;
+      f.value = !0, (await fetch(`${V}${S}${W}`, { signal: M.signal })).json().then((P) => {
+        h.delete(g), u.value = P.response.docs, f.value = !1;
       });
     }
-    return (i, u) => (l(), r("div", {
-      id: "o_annotate_wrapper_" + n(t),
+    return (s, d) => (r(), i("div", {
+      id: "o_annotate_wrapper_" + l(t),
       class: "o_annotate_wrapper"
     }, [
-      e.label ? (l(), r("label", ge, b(e.label), 1)) : T("", !0),
-      S.value ? (l(), r("div", xe, [
-        d("textarea", {
+      e.label ? (r(), i("label", ye, k(e.label), 1)) : C("", !0),
+      $.value ? (r(), i("div", be, [
+        p("textarea", {
           ref_key: "o_annotate_textarea",
           ref: o,
-          onMouseup: M,
-          onKeyup: M,
-          onInput: I,
+          onMouseup: I,
+          onKeyup: I,
+          onInput: O,
           class: "o_annotate_textarea"
-        }, b(n(C)), 545)
-      ])) : (l(), r("div", he, [
-        d("div", {
-          onMouseup: M,
-          onKeyup: M,
-          onInput: I,
+        }, k(l(T)), 545)
+      ])) : (r(), i("div", _e, [
+        p("div", {
+          onMouseup: I,
+          onKeyup: I,
+          onInput: O,
           class: "o_annotate_textarea",
           ref: "o_annotate_div",
           contenteditable: "true"
-        }, b(n(C)), 545)
+        }, k(l(T)), 545)
       ])),
-      n(a) != "" ? (l(), r("div", {
+      l(a) != "" ? (r(), i("div", {
         key: 3,
         class: "contextmenu",
-        style: G(n(v))
+        style: G(l(m))
       }, [
-        n(k).length == 0 && !n(w) ? (l(), r("div", me, "No matches found")) : (l(), r("div", be, [
-          (l(!0), r(N, null, K(n(k), (h) => (l(), r("div", {
+        l(u).length == 0 && !l(f) ? (r(), i("div", we, "No matches found")) : (r(), i("div", ke, [
+          (r(!0), i(N, null, K(l(u), (_) => (r(), i("div", {
             class: "contextmenu_item",
-            key: h.short_label,
+            key: _.short_label,
             role: "option",
             tabindex: "_1",
             aria_selected: "false",
             aria_setsize: "3",
             aria_posinset: "0",
-            onClickCapture: A(($) => z(h), ["stop", "prevent"])
+            onClickCapture: R((S) => z(_), ["stop", "prevent"])
           }, [
-            d("p", {
-              innerHTML: h.label
-            }, null, 8, _e),
-            d("small", null, b(h.ontology_prefix) + ":" + b(h.short_form), 1)
-          ], 40, ye))), 128))
+            p("p", {
+              innerHTML: _.label
+            }, null, 8, Te),
+            p("small", null, k(_.ontology_prefix) + ":" + k(_.short_form), 1)
+          ], 40, $e))), 128))
         ]))
-      ], 4)) : T("", !0),
-      d("div", null, [
-        n(w) ? (l(), r("div", we, $e)) : T("", !0),
-        d("div", null, [
-          e.info ? (l(), r("span", Se, b(e.info), 1)) : T("", !0)
+      ], 4)) : C("", !0),
+      p("div", null, [
+        l(f) ? (r(), i("div", Se, qe)) : C("", !0),
+        p("div", null, [
+          e.info ? (r(), i("span", Me, k(e.info), 1)) : C("", !0)
         ])
       ])
-    ], 8, ve));
+    ], 8, me));
   }
-}), Ce = `.o_annotate_textarea[data-v-bc5db457]{min-height:100px;border:1px solid #d7d7d7;box-shadow:none;box-sizing:border_box;padding:12px 45px 12px 10px;width:100%}#mainInput[data-v-bc5db457]{background:transparent;color:#000;opacity:1}.contextmenu[data-v-bc5db457]{position:absolute;top:0;right:0;background:#ffffff;color:#000;border:1px solid #f1f1f2;width:15rem;max-width:calc(100vw _ 2rem);max-height:300px;overflow-y:scroll;overflow-x:hidden;z-index:100;box-shadow:0 .5rem 1.5rem #0003;border-radius:.2rem}.contextmenu .contextmenu_item[data-v-bc5db457]{border-bottom:1px solid #c3c3c3;padding:8px}.contextmenu .contextmenu_item[data-v-bc5db457]:hover{cursor:pointer;background-color:#f1f1f2}.contextmenu .contextmenu_item p[data-v-bc5db457]{margin:0;padding:0}.contextmenu .contextmenu_item .iri[data-v-bc5db457]{margin:0;width:15rem;white-space:nowrap;text-overflow:ellipsis;word-wrap:break_word;padding:0}
-`, qe = /* @__PURE__ */ H(Te, [["styles", [Ce]], ["__scopeId", "data-v-bc5db457"]]), Me = { key: 0 }, Oe = ["onKeyup", "onChange"], Ie = { key: 1 }, ze = { key: 2 }, Ee = { key: 3 }, Ae = /* @__PURE__ */ L({
+}), Oe = `.o_annotate_textarea[data-v-aaa7ce3e]{min-height:100px;width:100%;border:1px solid #d7d7d7;box-shadow:none;box-sizing:border_box;padding:12px 10px;resize:none}#mainInput[data-v-aaa7ce3e]{background:transparent;color:#000;opacity:1}.contextmenu[data-v-aaa7ce3e]{position:absolute;top:0;right:0;background:#ffffff;color:#000;border:1px solid #f1f1f2;width:15rem;max-width:calc(100vw _ 2rem);max-height:300px;overflow-y:scroll;overflow-x:hidden;z-index:100;box-shadow:0 .5rem 1.5rem #0003;border-radius:.2rem}.contextmenu .contextmenu_item[data-v-aaa7ce3e]{border-bottom:1px solid #c3c3c3;padding:8px}.contextmenu .contextmenu_item[data-v-aaa7ce3e]:hover{cursor:pointer;background-color:#f1f1f2}.contextmenu .contextmenu_item p[data-v-aaa7ce3e]{margin:0;padding:0}.contextmenu .contextmenu_item .iri[data-v-aaa7ce3e]{margin:0;width:15rem;white-space:nowrap;text-overflow:ellipsis;word-wrap:break_word;padding:0}
+`, ze = /* @__PURE__ */ j(Ie, [["styles", [Oe]], ["__scopeId", "data-v-aaa7ce3e"]]), Ee = { key: 0 }, Le = ["onKeyup", "onChange"], Ae = { key: 1 }, Re = { key: 2 }, je = { key: 3 }, De = /* @__PURE__ */ E({
   __name: "ontology-compose.ce",
   props: {
     label: {
@@ -315,106 +333,107 @@ $$$$
     }
   },
   emits: ["change"],
-  setup(e, { emit: y }) {
-    const _ = e;
-    let t = m(""), o = m(""), S = -1, C = 100, s = 0, a = m([]), w = "", k = "", c = !1, f = m([]), v = m([]), g = m(null);
-    const I = O(() => g.value ? g.value ? g.value.label + "	" + g.value.ontology_prefix + "	" + g.value.iri + "	" + g.value.type : "" : null), z = O(() => t.value ? _.format && _.format == "json" ? {
+  setup(e, { emit: c }) {
+    const x = e;
+    let t = w(""), o = w(""), $ = -1, T = 100, n = 0, a = w([]), f = "", u = "", v = !1, h = w([]), m = w([]), y = w(null);
+    const O = q(() => y.value ? y.value ? y.value.label + "	" + y.value.ontology_prefix + "	" + y.value.iri + "	" + y.value.type : "" : null), z = q(() => t.value ? x.format && x.format == "json" ? {
       text: t.value,
-      ontology: f.value
+      ontology: h.value
     } : t.value + `
 $$$$
-` + f.value.join(`
+` + h.value.join(`
 `) : null);
-    async function M(p) {
+    async function I(g) {
       if (t.value == "") {
         o.value = "";
         return;
       }
-      if (S > -1 && clearTimeout(S), p.key == "ArrowDown") {
-        s == 9 && E(), s += 1, $(), p.preventDefault();
+      if ($ > -1 && clearTimeout($), g.key == "ArrowDown") {
+        n == 9 && A(), n += 1, S(), g.preventDefault();
         return;
-      } else if (p.key == "ArrowUp") {
-        s == 0 && E(), s -= 1, $(), p.preventDefault();
+      } else if (g.key == "ArrowUp") {
+        n == 0 && A(), n -= 1, S(), g.preventDefault();
         return;
-      } else if (p.key == "ArrowRight")
-        p.preventDefault(), u();
+      } else if (g.key == "ArrowRight")
+        g.preventDefault(), d();
       else if (t.value) {
-        let x = t.value.split(" ");
-        x.length > 1 ? (w = x.slice(-1)[0], k = x.slice(-2).join(" ")) : (w = x[0], k = w), w == "" && (c = !1, g.value = null, o.value = t.value), c && (w = k), i();
+        let b = t.value.split(" ");
+        b.length > 1 ? (f = b.slice(-1)[0], u = b.slice(-2).join(" ")) : (f = b[0], u = f), f == "" && (v = !1, y.value = null, o.value = t.value), v && (f = u), s();
       }
     }
-    function j() {
-      y("change", z.value);
+    function D() {
+      c("change", z.value);
     }
-    function E() {
-      c = !0, w = k, s = 0, i();
+    function A() {
+      v = !0, f = u, n = 0, s();
     }
-    function i() {
-      S = setTimeout(function() {
-        h();
-      }, C);
+    function s() {
+      $ = setTimeout(function() {
+        _();
+      }, T);
     }
-    function u() {
-      t.value = o.value, f.value.push(I.value), v.value.push(g.value);
+    function d() {
+      t.value = o.value, h.value.push(O.value), m.value.push(y.value);
     }
-    async function h() {
-      const p = "https://service.tib.eu/ts4tib/api/select?q=", x = encodeURI("&obsoletes=false&local=false&rows=10");
-      (await fetch(`${p}${w}${x}`)).json().then((D) => {
-        a.value = D.response.docs, a.value.length > 0 && (s = 0, $());
+    async function _() {
+      const g = "https://service.tib.eu/ts4tib/api/select?q=", b = encodeURI("&obsoletes=false&local=false&rows=10");
+      (await fetch(`${g}${f}${b}`)).json().then((V) => {
+        a.value = V.response.docs, a.value.length > 0 && (n = 0, S());
       });
     }
-    function $() {
-      let p = "";
-      g.value = a.value[s], p = g.value.label;
-      let x = p.toLowerCase().replace(w, "");
-      x != null && (o.value = t.value + x);
+    function S() {
+      let g = "";
+      y.value = a.value[n], g = y.value.label;
+      let b = g.toLowerCase().replace(f, "");
+      b != null && (o.value = t.value + b);
     }
-    return (p, x) => (l(), r("div", null, [
-      e.label ? (l(), r("label", Me, b(e.label), 1)) : T("", !0),
-      d("div", null, [
-        V(d("textarea", {
-          "onUpdate:modelValue": x[0] || (x[0] = (q) => U(o) ? o.value = q : o = q),
+    return (g, b) => (r(), i("div", null, [
+      e.label ? (r(), i("label", Ee, k(e.label), 1)) : C("", !0),
+      p("div", null, [
+        H(p("textarea", {
+          "onUpdate:modelValue": b[0] || (b[0] = (M) => U(o) ? o.value = M : o = M),
           id: "autocomplete",
           type: "text",
           class: "o_annotate_textarea",
           line: "10"
         }, null, 512), [
-          [B, n(o)]
+          [B, l(o)]
         ]),
-        V(d("textarea", {
+        H(p("textarea", {
           id: "mainInput",
-          onKeyup: A(M, ["stop"]),
-          onChange: A(j, ["stop"]),
-          "onUpdate:modelValue": x[1] || (x[1] = (q) => U(t) ? t.value = q : t = q),
+          onKeyup: R(I, ["stop"]),
+          onChange: R(D, ["stop"]),
+          "onUpdate:modelValue": b[1] || (b[1] = (M) => U(t) ? t.value = M : t = M),
           type: "text",
           class: "o_annotate_textarea"
-        }, null, 40, Oe), [
-          [B, n(t)]
+        }, null, 40, Le), [
+          [B, l(t)]
         ])
       ]),
-      e.info && n(a).length == 0 ? (l(), r("p", Ie, b(e.info), 1)) : T("", !0),
-      n(g) ? (l(), r("span", ze, [
-        d("code", null, [
-          d("pre", null, b(n(I)), 1)
+      e.info && l(a).length == 0 ? (r(), i("p", Ae, k(e.info), 1)) : C("", !0),
+      l(y) ? (r(), i("span", Re, [
+        p("code", null, [
+          p("pre", null, k(l(O)), 1)
         ])
-      ])) : T("", !0),
-      n(f) && n(f).length > 0 ? (l(), r("span", Ee, [
-        d("code", null, [
-          d("pre", null, b(n(z)), 1)
+      ])) : C("", !0),
+      l(h) && l(h).length > 0 ? (r(), i("span", je, [
+        p("code", null, [
+          p("pre", null, k(l(z)), 1)
         ])
-      ])) : T("", !0)
+      ])) : C("", !0)
     ]));
   }
-}), Le = `.o_annotate_textarea[data-v-c52caae7]{min-height:100px;border:1px solid #d7d7d7;box-shadow:none;box-sizing:border-box;padding:12px 45px 12px 10px;width:100%}#mainInput[data-v-c52caae7]{background:transparent;color:#000;opacity:100}#autocomplete[data-v-c52caae7]{position:absolute;box-sizing:border-box;cursor:text;pointer-events:none;color:#000;opacity:.6;background:transparent}
-`, Re = /* @__PURE__ */ H(Ae, [["styles", [Le]], ["__scopeId", "data-v-c52caae7"]]), je = R(Z), De = R(pe), Ve = R(qe), Ue = R(Re);
+}), Ve = `.o_annotate_textarea[data-v-f73143e2]{min-height:100px;width:100%;border:1px solid #d7d7d7;box-shadow:none;box-sizing:border-box;padding:12px 10px;resize:none}#mainInput[data-v-f73143e2]{background:transparent;color:#000;opacity:100}#autocomplete[data-v-f73143e2]{position:absolute;box-sizing:border-box;cursor:text;pointer-events:none;color:#000;opacity:.6;background:transparent}
+`, He = /* @__PURE__ */ j(De, [["styles", [Ve]], ["__scopeId", "data-v-f73143e2"]]), Ue = L(Z), Be = L(ae), Ne = L(he), Ke = L(ze), We = L(He);
 if (typeof window < "u") {
   let e = window.customElements;
-  e.define("ontology-annotation", je), e.define("ontology-autocomplete", De), e.define("ontology-annotate", Ve), e.define("ontology-compose", Ue);
+  e.define("ontology-term-annotation", Ue), e.define("ontology-text-annotation", Be), e.define("ontology-autocomplete", Ne), e.define("ontology-annotate", Ke), e.define("ontology-compose", We);
 }
 export {
-  Ve as OntologyAnnotate,
-  je as OntologyAnnotation,
-  De as OntologyAutoComplete,
-  Ue as OntologyCompose
+  Ke as OntologyAnnotate,
+  Ne as OntologyAutoComplete,
+  We as OntologyCompose,
+  Ue as OntologyTermAnnotation,
+  Be as OntologyTextAnnotation
 };
 //# sourceMappingURL=index.js.map
