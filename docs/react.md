@@ -8,4 +8,4 @@ outline: deep
 
 ## Stackblitz embed
 
-<iframe style="width: 100%; height: 500px" src="https://stackblitz.com/edit/vitejs-vite-ianme6?file=src%2FApp.jsx"></iframe>
+<iframe style="width: 100%; height: 500px" src="https://stackblitz.com/edit/react-xf6j94?embed=1&file=src%2FApp.js"></iframe>
