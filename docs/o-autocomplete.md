@@ -27,9 +27,9 @@ let value = ref("")
 <pre style="margin:0"><code>{{ value }}</code></pre>
 
 **#rich**
-<ontology-annotation 
+<ontology-term-annotation 
     :annotation="value">
-</ontology-annotation>
+</ontology-term-annotation>
 </span>
 <br/>
 <br/>

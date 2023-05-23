@@ -17,18 +17,18 @@ Macrobrachium nipponense	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_1597
 
  will be rendered as the following
 
-<ontology-annotation 
+<ontology-term-annotation 
     annotation="Macrobrachium nipponense	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_159736">
-</ontology-annotation>
+</ontology-term-annotation>
 
 <br/>
 
 #### Code sample
 
 ```html
- <ontology-annotation 
+ <ontology-term-annotation 
     annotation="Macrobrachium nipponense	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_159736">
-</ontology-annotation>
+</ontology-term-annotation>
 ```
 
 ## props
