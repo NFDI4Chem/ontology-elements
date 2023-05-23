@@ -39,6 +39,7 @@ export default defineConfig({
           { text: 'React', link: '/react' },
           { text: 'Angular', link: '/angular' },
           { text: 'Vuejs', link: '/vuejs' },
+          { text: 'Svelte', link: '/svelte' },
           { text: 'No framework (static)', link: '/static-html' },
         ]
       },
