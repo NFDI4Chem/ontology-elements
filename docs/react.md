@@ -4,7 +4,7 @@ outline: deep
 
 # ReactJS 
 
-### Version: Experimental
+### Version: 18 / Experimental
 
 ## Stackblitz embed
 

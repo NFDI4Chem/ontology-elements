@@ -16,9 +16,9 @@ hero:
 features:
   - title: Semantic data capture
     details: Ontology-driven web components ensure a consistent and standardized representation of data, facilitating seamless integration and interpretation of information within life sciences web applications
-  - title: Ontology-driven BRAT standoff output
-    details: OE combines the benefits of ontologies with the flexibility of the BRAT standoff format for annotating text.
+  - title: Ontology-driven standoff output
+    details: OE combines the benefits of ontologies with the flexibility of the standoff format for annotating text.
   - title: Annotation without database schema modifications
-    details: Ontology-driven BRAT standoff format allows for annotating text without requiring any changes to the underlying database schema
+    details: Ontology-driven standoff format enables text annotation without requiring any changes to the underlying database schema
 ---
 
