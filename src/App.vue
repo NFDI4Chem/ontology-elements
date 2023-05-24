@@ -5,7 +5,7 @@ import OntologyAutoComplete from './components/ontology-autocomplete.ce.vue'
 import OntologyCompose from './components/ontology-compose.ce.vue'
 import OntologyAnnotate from './components/ontology-annotate.ce.vue'
 import { ref } from 'vue'
-let autoCompleteValue = ref('')
+let autoCompleteValue = ref('Homo sapiens	OBI	http://purl.obolibrary.org/obo/NCBITaxon_9606	class')
 let annotatedTerm = ref('Homo sapiens	OBI	http://purl.obolibrary.org/obo/NCBITaxon_9606	class')
 let annotatedText =
   ref(`Seven previously undescribed diterpenoids, tinocrisposides A–D (1–4) and borapetic acids A (5), B (6), and C (7), together with 16 known compounds, were isolated from the stem of Tinospora crispa (Menispermaceae). The structures of the new isolates were elucidated by spectroscopic and chemical methods. The β-cell protective effect of the tested compounds was examined on insulin-secreting BRIN-BD11 cells under dexamethasone treatment. Diterpene glycosides 12, 14–16, and 18 presented a substantial protective effect on BRIN-BD11 cells treated with dexamethasone in a dose-dependent manner. Compounds 4 and 17 with two sugar moieties exhibited clear protective effects on β-cells.
@@ -32,6 +32,16 @@ let composedContent = ref('')
         label="Input field (ontology driven)"
         info="Search terms across ontologies"
         placeholder="search term"
+        :modelValue="autoCompleteValue"
+      ></ontology-auto-complete>
+      <br />
+      <ontology-auto-complete
+        @change="autoCompleteValue = $event"
+        format="text"
+        label="Input field (ontology driven)"
+        info="Search terms across ontologies"
+        placeholder="search term"
+        :modelValue="autoCompleteValue"
       ></ontology-auto-complete>
       <br />
       <code v-if="autoCompleteValue">

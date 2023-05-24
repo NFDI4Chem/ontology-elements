@@ -7,6 +7,7 @@
       v-model="searchTerm"
       @input.stop="getSelectOptions"
       :placeholder="placeholder"
+      :class="styling"
       autocomplete="off"
     />
     <p v-if="info && matches.length == 0">{{ info }}</p>
@@ -37,7 +38,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
+
+const emit = defineEmits(['change'])
 
 const props = defineProps({
   label: {
@@ -60,6 +63,16 @@ const props = defineProps({
     required: false,
     default: ''
   },
+  modelValue: {
+    type: String,
+    required: false,
+    default: ''
+  },
+  styling: {
+    type: String,
+    required: false,
+    default: ''
+  },
   format: {
     type: String,
     required: false,
@@ -67,11 +80,48 @@ const props = defineProps({
   }
 })
 
+const selectTerm = (term: any) => {
+  selectedTerm.value = term
+  searchTerm.value = term.label
+  emit('change', selectedValue.value)
+  matches.value = []
+}
+
 let searchTerm = ref('')
-
-const emit = defineEmits(['change'])
-
 let matches = ref([])
+let selectedTerm = ref(null)
+
+const selectedValue = computed(() => {
+  if (!selectedTerm.value) {
+    return null
+  }
+  if (props.format && props.format == 'json') {
+    return selectedTerm.value
+  } else {
+    return selectedTerm.value
+      ? selectedTerm.value['label'] +
+          '\t' +
+          selectedTerm.value['ontology_prefix'] +
+          '\t' +
+          selectedTerm.value['iri'] +
+          '\t' +
+          selectedTerm.value['type']
+      : ''
+  }
+})
+
+watch(
+  () => props.modelValue,
+  (newValue, oldValue) => {
+    selectTerm(composeOntologyObject(newValue))
+  }
+)
+
+onMounted(() => {
+  if (props.modelValue != '') {
+    selectTerm(composeOntologyObject(props.modelValue))
+  }
+})
 
 async function getSelectOptions() {
   if (searchTerm.value === '') {
@@ -111,36 +161,22 @@ function highlight(content: string) {
   })
 }
 
-function concat(data: Array<[]>) {
-  return data ? data.join('') : ''
-}
-
-let selectedTerm = ref(null)
-
-const selectedValue = computed(() => {
-  if (!selectedTerm.value) {
+function composeOntologyObject(content: string) {
+  if (!content) {
     return null
   }
-  if (props.format && props.format == 'json') {
-    return selectedTerm.value
-  } else {
-    return selectedTerm.value
-      ? selectedTerm.value['label'] +
-          '\t' +
-          selectedTerm.value['ontology_prefix'] +
-          '\t' +
-          selectedTerm.value['iri'] +
-          '\t' +
-          selectedTerm.value['type']
-      : ''
+  const data = content.split('\t')
+  let _ontologyObject = {
+    label: data[0],
+    iri: data[2],
+    ontology_prefix: data[1],
+    type: data[3]
   }
-})
+  return _ontologyObject
+}
 
-const selectTerm = (term: any) => {
-  selectedTerm.value = term
-  searchTerm.value = term.label
-  emit('change', selectedValue.value)
-  matches.value = []
+function concat(data: Array<[]>) {
+  return data ? data.join('') : ''
 }
 </script>
 
