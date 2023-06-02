@@ -15,7 +15,4 @@ To contribute to the NFDI4Chem Ontology-Elements project, you can fork the repos
 Yes, you can propose new ontology elements or suggest modifications to existing elements in the NFDI4Chem Ontology-Elements. Fork the repository, make the necessary changes to the ontology files, and submit a pull request to have your modifications reviewed and considered for inclusion.
 
 ### Can I use the NFDI4Chem Ontology-Elements in commercial applications?
-The licensing terms for the NFDI4Chem Ontology-Elements may vary. It is important to review the specific license associated with the repository to determine whether it permits commercial usage. Refer to the repository's LICENSE file or consult the project maintainers for further clarification.
-
-### Is the NFDI4Chem Ontology-Elements project actively maintained?
-The maintenance and development activity of the NFDI4Chem Ontology-Elements project can vary over time. It is advisable to check the repository's commit history, issue tracking, and community discussions to assess the current level of activity and community engagement.
+Refer to the repository's LICENSE file or consult the project maintainers for further clarification.
