@@ -32,8 +32,9 @@ let composedContent = ref('')
         label="Input field (ontology driven)"
         info="Search terms across ontologies"
         placeholder="search term"
-        :modelValue="autoCompleteValue"
+        :value="autoCompleteValue"
       ></ontology-auto-complete>
+      <button @click="autoCompleteValue=''">CLEAR</button>
       <br />
       <ontology-auto-complete
         @change="autoCompleteValue = $event"
@@ -41,7 +42,7 @@ let composedContent = ref('')
         label="Input field (ontology driven)"
         info="Search terms across ontologies"
         placeholder="search term"
-        :modelValue="autoCompleteValue"
+        :value="autoCompleteValue"
       ></ontology-auto-complete>
       <br />
       <code v-if="autoCompleteValue">
