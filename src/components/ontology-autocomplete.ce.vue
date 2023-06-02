@@ -63,7 +63,7 @@ const props = defineProps({
     required: false,
     default: ''
   },
-  modelValue: {
+  value: {
     type: String,
     required: false,
     default: ''
@@ -81,10 +81,15 @@ const props = defineProps({
 })
 
 const selectTerm = (term: any) => {
-  selectedTerm.value = term
-  searchTerm.value = term.label
-  emit('change', selectedValue.value)
-  matches.value = []
+  if(term == ""){
+    selectedTerm.value = null
+    searchTerm.value = ""
+  }else{
+    selectedTerm.value = term
+    searchTerm.value = term.label
+    emit('change', selectedValue.value)
+    matches.value = []
+  }
 }
 
 let searchTerm = ref('')
@@ -111,15 +116,15 @@ const selectedValue = computed(() => {
 })
 
 watch(
-  () => props.modelValue,
+  () => props.value,
   (newValue, oldValue) => {
     selectTerm(composeOntologyObject(newValue))
   }
 )
 
 onMounted(() => {
-  if (props.modelValue != '') {
-    selectTerm(composeOntologyObject(props.modelValue))
+  if (props.value != '') {
+    selectTerm(composeOntologyObject(props.value))
   }
 })
 
@@ -162,8 +167,8 @@ function highlight(content: string) {
 }
 
 function composeOntologyObject(content: string) {
-  if (!content) {
-    return null
+  if (!content || content == '') {
+    return ""
   }
   const data = content.split('\t')
   let _ontologyObject = {

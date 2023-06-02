@@ -36,7 +36,7 @@ c	BTO 391 400	BRIN-BD11 cell	http://purl.obolibrary.org/obo/BTO_0002142
 
 ```html
  <ontology-text-annotation 
-    annotation="Macrobrachium nipponense	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_159736">
+    annotation="text with annotations">
 </ontology-text0annotation>
 ```
 
