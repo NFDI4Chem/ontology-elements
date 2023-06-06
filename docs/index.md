@@ -17,8 +17,8 @@ features:
   - title: Semantic data capture
     details: Ontology-driven web components ensure a consistent and standardized representation of data, facilitating seamless integration and interpretation of information within life sciences web applications
   - title: Ontology-driven standoff output
-    details: OE combines the benefits of ontologies with the flexibility of the standoff format for annotating text.
-  - title: Annotation without database schema modifications
-    details: Ontology-driven standoff format enables text annotation without requiring any changes to the underlying database schema
+    details: Ontology Elements (OE's) combines the benefits of ontologies with the flexibility of the standoff format for annotating text, offering several benefits for Named Entity Recognition (NER) training tasks
+  - title: Annotations without database schema modifications
+    details: Ontology-driven standoff format enables text annotation without requiring any changes to the underlying database schema or types
 ---
 

@@ -5,13 +5,16 @@ export default defineConfig({
   description: "ontology-elements docs",
   base: '/ontology-elements/',
   themeConfig: {
-    logo: '/oe-logo-color.svg',
+    logo: { 
+      light: 'oe-logo-color.svg',
+      dark: 'oe-logo-light.svg'
+    },
 
     siteTitle: '',
 
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Docs', link: '/introduction' },
+      { text: 'Documentation', link: '/introduction' },
       { text: 'Demo', link: '/demo' }
     ],
 
@@ -26,11 +29,13 @@ export default defineConfig({
       {
         text: 'Components',
         items: [
-          { text: 'Annotated Term', link: '/o-term-annotation' },
-          { text: 'Text Annotation', link: '/o-text-annotation' },
+          { text: 'Annotation', items: [
+            { text: 'Terms', link: '/o-term-annotation' },
+            { text: 'Text / Paragraphs', link: '/o-text-annotation' },
+          ] },
           { text: 'Autocomplete (Input)', link: '/o-autocomplete' },
-          { text: 'Compose (Textarea)', link: '/o-compose' },
           { text: 'Annotate (Textarea)', link: '/o-annotate' },
+          { text: 'Compose (Textarea)', link: '/o-compose' },
         ]
       },
       {

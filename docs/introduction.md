@@ -13,6 +13,20 @@ The importance of ontologies and controlled vocabularies for semantic text annot
 
 In addition, ontologies and controlled vocabularies can help to improve the accuracy and completeness of annotations. By using standardized terms and definitions, annotators can ensure that their annotations are consistent and that they accurately reflect the content of the text.
 
+Not using ontologies for text annotation in the scientific domain can have several downsides. 
+
+- Without ontologies, there may be a lack of standardized and structured terminology, leading to inconsistencies and ambiguity in annotations. This can make it challenging to integrate and compare data from different sources or perform accurate data analysis. 
+
+- The absence of ontologies hinders interoperability and data sharing, as there is no common framework for understanding and linking concepts across different scientific domains. 
+
+- Without ontologies, it becomes difficult to leverage existing knowledge bases and resources, limiting the potential for automated reasoning, knowledge discovery, and advanced NER training.
+
+Overall, not using ontologies in scientific text annotation can impede collaboration, hinder knowledge integration, and limit the overall scientific understanding and advancements in the field.
+
+The absence of ontology annotations in scientific data capture, annotation, and deposition can be attributed to resource-intensive ontology development and maintenance. Constructing ontologies that accurately represent the complexities of scientific concepts and relationships requires substantial domain expertise, time, and effort. This can be particularly challenging due to the rapidly evolving nature of scientific knowledge. The associated costs and efforts involved in ontology development often discourage widespread adoption in the scientific domain. However, initiatives like NFDI4Chem - TIB Terminology Service and EMBL - EBI OLS4 provide valuable resources for querying and retrieving ontology terms, helping to address this challenge.
+
+Consequently, the lack of ontology-driven rich input fields in web applications and Electronic Lab Notebooks (ELNs) poses another issue. This absence limits the ability to incorporate structured ontology-based annotations directly within forms, hindering the capture of semantically meaningful data. The integration of ontology-driven input fields would enable researchers to capture and annotate data in a manner aligned with domain-specific ontologies, facilitating improved data quality, interoperability, and knowledge integration within the scientific community.
+
 ## Webcomponents
 
 Web components are a set of standardized web platform APIs (Application Programming Interfaces) for creating reusable, encapsulated, and interoperable custom HTML elements. They allow developers to define their own HTML tags and elements with associated JavaScript logic, styles, and templates, which can then be used across multiple web pages and applications. Web components make it easier to build complex web applications by promoting modularity, reusability, and extensibility, and can improve the performance, maintainability, and accessibility of web content.
@@ -130,8 +144,22 @@ In this example, the fields represent the following information:
 
 By storing the FlyBase ontology annotations in a structured format, the database allows for efficient retrieval, querying, and analysis of gene and phenotype data based on the associated ontology terms, providing researchers with valuable information for studying the genetics and biology of Drosophila melanogaster.
 
+### MetaboLights
 
----
+MetaboLights stores its ontology annotations using the ISA-Tab format. The ISA-Tab format is a widely adopted standard for organizing and describing metadata associated with biological experiments, including metabolomics studies.
+
+In the context of MetaboLights, the ISA-Tab format provides a structured and standardized framework for capturing and storing ontology annotations alongside experimental metadata. The annotations are typically stored within the metadata files associated with each study or assay. The ISA-Tab format organizes metadata into three main components: investigation, study, and assay. Within these components, ontology annotations are stored using specific columns or fields dedicated to capturing ontology terms. Researchers can associate relevant ontology terms with various aspects of their experiments, such as sample characteristics, experimental variables, or data annotations. 
+
+Here is an example MetaboLights samples ontology annotation 
+
+```
+Source Name	Characteristics[Organism]	Term Source REF	Term Accession Number	Characteristics[Organism part]	Term Source REF	Term Accession Number	Protocol REF	Sample Name	Factor Value[Gender]	Term Source REF	Term Accession Number	Factor Value[Metabolic syndrome]	Term Source REF	Term Accession Number
+ADG10003u	Homo sapiens	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_9606	urine	BTO	http://purl.obolibrary.org/obo/BTO_0001419	Sample collection	ADG10003u_007	Male			diabetes mellitus		
+ADG10003u	Homo sapiens	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_9606	urine	BTO	http://purl.obolibrary.org/obo/BTO_0001419	Sample collection	ADG10003u_008	Male			diabetes mellitus		
+ADG10003u	Homo sapiens	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_9606	urine	BTO	http://purl.obolibrary.org/obo/BTO_0001419	Sample collection	ADG10003u_009	Male			diabetes mellitus		
+ADG10003u	Homo sapiens	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_9606	urine	BTO	http://purl.obolibrary.org/obo/BTO_0001419	Sample collection	ADG10003u_010	Male			diabetes mellitus		
+```
+
 
 ## Standoff format
 

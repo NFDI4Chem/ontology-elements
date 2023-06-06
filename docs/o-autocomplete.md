@@ -34,7 +34,6 @@ let value = ref("")
 <br/>
 <br/>
 
----
 
 #### Code sample
 
@@ -48,20 +47,58 @@ let value = ref("")
 ></ontology-autocomplete>
 ```
 
+## Search filters - Ontologies 
+
+<ontology-autocomplete 
+    format="text"
+    label="Organism annotation"
+    info="Limiting search to - chmo,ncbitaxon,pato,efo,mtbls,bto,chebi,ncit,uo"
+    @change="value = $event.detail[0]"
+    ontologies="chmo,ncbitaxon,pato,efo,mtbls,bto,chebi,ncit,uo"
+    placeholder="search term"
+></ontology-autocomplete>
+
+<br/>
+
+#### Code sample
+
+```html
+<ontology-autocomplete 
+    format="text"
+    label="Input field (ontology driven)"
+    info="Search terms across ontologies. Example: Homo sapiens, obi:Homo sapiens"
+    @change="value = $event.detail[0]"
+    placeholder="search term"
+></ontology-autocomplete>
+```
+
+## Overriding Search filters 
+
+<ontology-autocomplete 
+    format="text"
+    label="Organism annotation"
+    info="Prefix search value to override default ontologies. Try searching for 'chmo:homogenisation'"
+    @change="value = $event.detail[0]"
+    ontologies="ncbitaxon,pato,efo,mtbls,bto,chebi,ncit,uo"
+    placeholder="search term"
+></ontology-autocomplete>
+
 ## props
 
 | Name        |      Type      |  Default | Description |
 | ----------- | :------------: | :------: | :---------- |
-| format      |                |          |             |
-| label       |                |          |             |
-| info        |                |          |             |
-| placeholder |                |          |             |
+| format      |    string      |     -    |             |
+| label       |    string      |     -    |             |
+| info        |    string      |     -    |             |
+| placeholder |    string      |     -    |             |
+| value       |    string      |     -    | default value |
+| ontologies  |    string      |     -    | Comma separated values of ontologies to restrict the OLS look up. |
 
 ## events
 
 | Name        |      Type      |  Default | Description |
 | ----------- | :------------: | :------: | :---------- |
-| change      |                |          |             |
+| change      |      event     |    -     |       Events emitted via OE are dispatched as native CustomEvents. Additional event arguments (payload) will be exposed as an array on the CustomEvent object as its detail property - ```$event.detail[0] ```     |
 
 ## styling
 
