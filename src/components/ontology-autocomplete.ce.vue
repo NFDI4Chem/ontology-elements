@@ -81,10 +81,10 @@ const props = defineProps({
 })
 
 const selectTerm = (term: any) => {
-  if(term == ""){
+  if (term == '') {
     selectedTerm.value = null
-    searchTerm.value = ""
-  }else{
+    searchTerm.value = ''
+  } else {
     selectedTerm.value = term
     searchTerm.value = term.label
     emit('change', selectedValue.value)
@@ -168,7 +168,7 @@ function highlight(content: string) {
 
 function composeOntologyObject(content: string) {
   if (!content || content == '') {
-    return ""
+    return ''
   }
   const data = content.split('\t')
   let _ontologyObject = {

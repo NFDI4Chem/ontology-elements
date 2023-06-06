@@ -5,17 +5,17 @@ outline: deep
 import "./../dist/index.js";
 </script>
 
-# Annotation Term (read-only)
+# Term Annotation (rich ontology annotation display)
 
-Ontology elements provide an annotation component that renders the annotation in a user-friendly format.
+Ontology elements provide a term annotation component that renders the annotation in a user-friendly format.
 
-Annotated term below
+The following annotated term
 
 ```
 Macrobrachium nipponense	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_159736
 ```
 
- will be rendered as the following
+will be rendered as the following
 
 <ontology-term-annotation 
     annotation="Macrobrachium nipponense	NCBITAXON	http://purl.obolibrary.org/obo/NCBITaxon_159736">

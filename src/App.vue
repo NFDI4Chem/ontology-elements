@@ -34,7 +34,7 @@ let composedContent = ref('')
         placeholder="search term"
         :value="autoCompleteValue"
       ></ontology-auto-complete>
-      <button @click="autoCompleteValue=''">CLEAR</button>
+      <button @click="autoCompleteValue = ''">CLEAR</button>
       <br />
       <ontology-auto-complete
         @change="autoCompleteValue = $event"
