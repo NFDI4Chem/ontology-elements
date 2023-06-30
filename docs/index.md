@@ -12,6 +12,7 @@ hero:
     - theme: alt
       text: Demo
       link: /demo
+ 
 
 features:
   - title: Semantic data capture
@@ -20,5 +21,7 @@ features:
     details: Ontology Elements (OE's) combines the benefits of ontologies with the flexibility of the standoff format for annotating text, offering several benefits for Named Entity Recognition (NER) training tasks
   - title: Annotations without database schema modifications
     details: Ontology-driven standoff format enables text annotation without requiring any changes to the underlying database schema or types
+
+ 
 ---
 
