@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Venkata"
+  given-names: "Chandrasekhar"
+  orcid: "https://orcid.org/0000-0002-2564-3243"
+- family-names: "Sharma"
+  given-names: "Nisha"
+  orcid: "https://orcid.org/0009-0006-4755-1039"
+- family-names: "Koepler"
+  given-names: "Oliver"
+  orcid: "https://orcid.org/0000-0003-3385-4232"
+- family-names: "Neumann"
+  given-names: "Steffen"
+  orcid: "https://orcid.org/0000-0002-7899-7192"
+- family-names: "Steinbeck"
+  given-names: "Christoph"
+  orcid: "https://orcid.org/0000-0001-6966-0814"
+title: "Ontology Elements"
+version: V1.0.0
+doi: 10.5281/zenodo.8112749
+date-released: 2023-04-27
+url: "https://github.com/NFDI4Chem/ontology-elements"
