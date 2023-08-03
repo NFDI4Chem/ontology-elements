@@ -31,7 +31,7 @@
 }
 
 .auto-search-wrapper input:focus {
-  border: 1px solid #858585;
+  border: 1px solid #d7d7d7;
   outline: none;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .auto-search-wrapper .auto-expanded {
-  border: 1px solid #858585;
+  border: 1px solid #d7d7d7;
   outline: none;
 }
 
@@ -159,7 +159,7 @@ li.loupe:before {
 
 .auto-results-wrapper {
   background-color: #fff;
-  border: 1px solid #858585;
+  border: 1px solid #d7d7d7;
   border-top: none;
   box-sizing: border-box;
   display: none;
@@ -272,4 +272,44 @@ li.loupe:before {
   background-color: #cdcdcd;
   border-radius: 4px;
   padding: 1px 3px;
+}
+
+ul,
+#myUL {
+  list-style-type: none;
+  padding-left: 10px;
+}
+
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+.caret {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+}
+
+.caret::before {
+  content: '\25B6';
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */
+  transform: rotate(90deg);
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
 }

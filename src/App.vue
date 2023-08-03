@@ -2,6 +2,7 @@
 import OntologyTermAnnotation from './components/ontology-term-annotation.ce.vue'
 import OntologyTextAnnotation from './components/ontology-text-annotation.ce.vue'
 import OntologyAutoComplete from './components/ontology-autocomplete.ce.vue'
+import OntologySelect from './components/ontology-select.ce.vue'
 import OntologyCompose from './components/ontology-compose.ce.vue'
 import OntologyAnnotate from './components/ontology-annotate.ce.vue'
 import { ref } from 'vue'
@@ -36,6 +37,7 @@ let composedContent = ref('')
       ></ontology-auto-complete>
       <button @click="autoCompleteValue = ''">CLEAR</button>
       <br />
+      <br />
       <ontology-auto-complete
         @change="autoCompleteValue = $event"
         format="text"
@@ -44,6 +46,22 @@ let composedContent = ref('')
         placeholder="search term"
         :value="autoCompleteValue"
       ></ontology-auto-complete>
+      <br />
+      <code v-if="autoCompleteValue">
+        Value:
+        <pre>{{ autoCompleteValue }}</pre>
+      </code>
+      <hr />
+      <br />
+      <ontology-select
+        @change="autoCompleteValue = $event"
+        format="text"
+        label="Select field (ontology driven)"
+        info="Search terms across ontologies"
+        placeholder="search term"
+        ontology="chmo"
+        :value="autoCompleteValue"
+      ></ontology-select>
       <br />
       <code v-if="autoCompleteValue">
         Value:
