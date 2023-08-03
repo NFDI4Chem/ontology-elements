@@ -64,7 +64,7 @@ export default defineConfig({
     ],
 
     footer: {
-      message: 'Licensed under the <a href="https://github.com/NFDI4Chem/ontology-elements/blob/main/LICENSE">MIT License</a>.',
+      message: 'Ontology-Elements is developed and maintained by the <a style="color:#0284c7;" href="https://www.nfdi4chem.de/">NFDI4Chem partners</a> at the <a style="color:#0284c7;" href="https://www.uni-jena.de/en/">Friedrich Schiller University </a> Jena, Germany. <br/>The code for this web application is released under the <a style="color:#0284c7;" href="https://github.com/NFDI4Chem/ontology-elements/blob/main/LICENSE">MIT License</a>.<br/> <p align="center"><a href="https://nfdi4chem.de/" target="_blank"><img src="https://www.nfdi4chem.de/wp-content/themes/wptheme/assets/img/logo.svg" width="15%" alt="NFDI4Chem Logo"></a>.',
     }
   },
 })
