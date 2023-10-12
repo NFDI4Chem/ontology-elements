@@ -4,12 +4,14 @@ import VueOntologyTextAnnotation from './components/ontology-text-annotation.ce.
 import VueOntologyAutoComplete from './components/ontology-autocomplete.ce.vue'
 import VueOntologyAnnotate from './components/ontology-annotate.ce.vue'
 import VueOntologyCompose from './components/ontology-compose.ce.vue'
+import VueOntologySelect from './components/ontology-select.ce.vue'
 
 export const OntologyTermAnnotation = defineCustomElement(VueOntologyTermAnnotation)
 export const OntologyTextAnnotation = defineCustomElement(VueOntologyTextAnnotation)
 export const OntologyAutoComplete = defineCustomElement(VueOntologyAutoComplete)
 export const OntologyAnnotate = defineCustomElement(VueOntologyAnnotate)
 export const OntologyCompose = defineCustomElement(VueOntologyCompose)
+export const OntologySelect = defineCustomElement(VueOntologySelect)
 
 if (typeof window !== 'undefined') {
   let customElementRegistry = window.customElements
@@ -18,4 +20,5 @@ if (typeof window !== 'undefined') {
   customElementRegistry.define('ontology-autocomplete', OntologyAutoComplete)
   customElementRegistry.define('ontology-annotate', OntologyAnnotate)
   customElementRegistry.define('ontology-compose', OntologyCompose)
+  customElementRegistry.define('ontology-select', OntologySelect)
 }

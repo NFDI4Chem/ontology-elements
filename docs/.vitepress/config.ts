@@ -34,6 +34,7 @@ export default defineConfig({
             { text: 'Text / Paragraphs', link: '/o-text-annotation' },
           ] },
           { text: 'Autocomplete (Input)', link: '/o-autocomplete' },
+          { text: 'Select (Dropdown)', link: '/o-select' },
           { text: 'Annotate (Textarea)', link: '/o-annotate' },
           { text: 'Compose (Textarea)', link: '/o-compose' },
         ]

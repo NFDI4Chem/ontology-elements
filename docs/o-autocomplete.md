@@ -51,7 +51,7 @@ let value = ref("")
 
 <ontology-autocomplete 
     format="text"
-    label="Organism annotation"
+    label=""
     info="Limiting search to - chmo,ncbitaxon,pato,efo,mtbls,bto,chebi,ncit,uo"
     @change="value = $event.detail[0]"
     ontologies="chmo,ncbitaxon,pato,efo,mtbls,bto,chebi,ncit,uo"
@@ -65,9 +65,10 @@ let value = ref("")
 ```html
 <ontology-autocomplete 
     format="text"
-    label="Input field (ontology driven)"
-    info="Search terms across ontologies. Example: Homo sapiens, obi:Homo sapiens"
+    label=""
+    info="Limiting search to - chmo,ncbitaxon,pato,efo,mtbls,bto,chebi,ncit,uo"
     @change="value = $event.detail[0]"
+    ontologies="chmo,ncbitaxon,pato,efo,mtbls,bto,chebi,ncit,uo"
     placeholder="search term"
 ></ontology-autocomplete>
 ```
@@ -76,7 +77,7 @@ let value = ref("")
 
 <ontology-autocomplete 
     format="text"
-    label="Organism annotation"
+    label=""
     info="Prefix search value to override default ontologies. Try searching for 'chmo:homogenisation'"
     @change="value = $event.detail[0]"
     ontologies="ncbitaxon,pato,efo,mtbls,bto,chebi,ncit,uo"
