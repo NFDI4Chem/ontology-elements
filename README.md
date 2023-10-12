@@ -4,8 +4,6 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-blue.svg)](https://github.com/NFDI4Chem/ontology-elements/graphs/commit-activity)
 [![GitHub issues](https://img.shields.io/github/issues/NFDI4Chem/ontology-elements.svg)](https://github.com/NFDI4Chem/ontology-elements/issues/)
 [![GitHub contributors](https://img.shields.io/github/contributors/NFDI4Chem/ontology-elements.svg)](https://github.com/NFDI4Chem/ontology-elements/graphs/contributors/)
-![Workflow](https://github.com/NFDI4Chem/ontology-elements/actions/workflows/dev-build.yml/badge.svg)
-![Workflow](https://github.com/NFDI4Chem/ontology-elements/actions/workflows/prod-build.yml/badge.svg)
 ![Workflow](https://github.com/NFDI4Chem/ontology-elements/actions/workflows/release-please.yml/badge.svg)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8212133.svg)](https://doi.org/10.5281/zenodo.8212133)
 
@@ -23,10 +21,6 @@ The ontology-Elements project aims at developing custom ontology-rich html eleme
 
 [https://nfdi4chem.github.io/ontology-elements/demo.html](https://nfdi4chem.github.io/ontology-elements/demo.html)
 
-## Installation :computer:
-
-You can run Cheminformatics Microservice as a standalone application using Python virtual environment or via Docker, or deploy to a Kubernetes cluster utilising [Helm charts](https://github.com/NFDI4Chem/repo-helm-charts/tree/main/charts). Please follow the links below for step-by-step instructions.
-
 ## License :scroll:
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/NFDI4Chem/ontology-elements/blob/main/LICENSE) file for details
@@ -43,7 +37,6 @@ The code for this web application is released under the [MIT license](https://op
 
 <p align="left"><a href="https://nfdi4chem.de/" target="_blank"><img src="https://www.nfdi4chem.de/wp-content/themes/wptheme/assets/img/logo.svg" width="50%" alt="NFDI4Chem Logo"></a></p>
 
-<<<<<<< Updated upstream
 ## Acknowledgments
 
 Funded by the [Deutsche Forschungsgemeinschaft (DFG, German Research Foundation)](https://www.dfg.de/) under the [National Research Data Infrastructure – NFDI4Chem](https://nfdi4chem.de/) – Projektnummer **441958208**.
@@ -55,5 +48,4 @@ Funded by the [Deutsche Forschungsgemeinschaft (DFG, German Research Foundation)
 Funded by the [Deutsche Forschungsgemeinschaft (DFG, German Research Foundation)](https://www.dfg.de/) under the [National Research Data Infrastructure – NFDI4Chem](https://nfdi4chem.de/) – Project number: **441958208** and  [ChemBioSys](https://www.chembiosys.de/en/) (Project INF) - Project number: **239748522 - SFB 1127**.
 
 <p align="left"><a href="https://www.dfg.de/" target="_blank"><img src="./docs/public/dfg_logo_schriftzug_blau_foerderung_en.gif" width="50%" alt="DFG Logo"></a></p>
->>>>>>> Stashed changes
 
