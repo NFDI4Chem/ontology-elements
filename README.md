@@ -27,7 +27,7 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
  
 ## Citation :newspaper:
 
-Venkata, Chandrasekhar, Sharma, Nisha, Hamed, Musallam, Koepler, Oliver, Neumann, Steffen, & Steinbeck, Christoph. (2023). Ontology Elements (v0.2.0). Zenodo. https://doi.org/10.5281/zenodo.8212133
+Venkata, C., Sharma, N., Musallam, H., Koepler, O., Neumann, S., & Steinbeck, C. (2023). Ontology Elements (Version V1.0.0) [Computer software]. https://doi.org/10.5281/zenodo.8212133
 
 ## Maintained by :wrench:
 
