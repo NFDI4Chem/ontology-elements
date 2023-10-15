@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.2.1](https://github.com/NFDI4Chem/ontology-elements/compare/v0.2.0...v0.2.1) (2023-10-12)
+
+
+### Bug Fixes
+
+* more funding docs fixes ([8c98b71](https://github.com/NFDI4Chem/ontology-elements/commit/8c98b71d65d6e127649a254c760d45ddcf3251d6))
+* resolved conflicts and broken links ([552a0fb](https://github.com/NFDI4Chem/ontology-elements/commit/552a0fb9bf4efbbb9c54afe7adef81fb60db3860))
+* updated citations file and readme ([566487d](https://github.com/NFDI4Chem/ontology-elements/commit/566487d3ca414652864d9c37ae1d7d1ce7080793))
+* updated zenodo doi ([34bbd26](https://github.com/NFDI4Chem/ontology-elements/commit/34bbd269ae3c6f2bb9628c3acb03d4a5af9a18bc))
+
 ## [0.2.0](https://github.com/NFDI4Chem/ontology-elements/compare/v0.1.0...v0.2.0) (2023-08-03)
 
 
